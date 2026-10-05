@@ -2,8 +2,17 @@ name: Revisar botones de Telegram
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # cada 10 minutos (GitHub puede retrasarlo un poco)
-  workflow_dispatch:  # botón para procesar tus pulsaciones al momento
+    - cron: "*/10 * * * *"   # respaldo: solo hace algo si NO usas el webhook de Cloudflare
+  workflow_dispatch:         # lo lanza al instante el webhook (o tú, a mano)
+    inputs:
+      accion:
+        description: "publicar / regenerar / descartar (lo rellena el webhook)"
+        required: false
+        default: ""
+      message_id:
+        description: "Mensaje de Telegram (lo rellena el webhook)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -25,12 +34,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+          cache: pip   # reutiliza las librerías descargadas: arranca más rápido
 
       - name: Instalar librerías
         run: pip install -r requirements.txt
 
       - name: Procesar botones pulsados
         env:
+          ACCION: ${{ inputs.accion }}
+          MESSAGE_ID: ${{ inputs.message_id }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -45,3 +57,13 @@ jobs:
           git config user.email "agente-linkedin@users.noreply.github.com"
           git add pendientes.json historial.json
           git diff --staged --quiet || (git commit -m "Borrador procesado" && git pull --rebase && git push)
+
+      - name: Avisarte por Telegram si algo ha fallado
+        if: failure()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            --data-urlencode text="⚠️ El agente ha fallado en «${{ github.workflow }}». Detalles: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

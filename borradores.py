@@ -24,7 +24,7 @@ def crear_borrador(estado, post, clave, formato, descartados=None, intento=1, es
     """Envía el borrador a Telegram con botones y lo guarda como pendiente."""
     etiqueta = "📌 Post especial" if especial else f"📝 Borrador ({formato})"
     message_id = enviar_mensaje(
-        f"{etiqueta}:\n\n{post}\n\n⏳ Puedes publicarlo cuando quieras.",
+        f"{etiqueta}:\n\n{post}\n\n⏳ Decide cuando quieras: este borrador no caduca.",
         con_botones=True,
     )
     estado["borradores"][str(message_id)] = {

@@ -47,7 +47,9 @@ def publicar_post(texto):
         json=cuerpo,
     )
     if r.status_code == 201:
-        return True, "Publicado en LinkedIn"
+        urn = r.headers.get("x-restli-id") or r.json().get("id", "")
+        url = f"https://www.linkedin.com/feed/update/{urn}/" if urn else ""
+        return True, url
     return False, f"Error {r.status_code}: {r.text[:300]}"
 
 

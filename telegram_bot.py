@@ -35,7 +35,12 @@ def leer_pulsaciones(offset=0):
     params = {"timeout": 0, "allowed_updates": '["callback_query"]'}
     if offset:
         params["offset"] = offset
-    updates = requests.get(f"{API}/getUpdates", params=params, timeout=30).json().get("result", [])
+    respuesta = requests.get(f"{API}/getUpdates", params=params, timeout=30).json()
+    if not respuesta.get("ok"):
+        # Si hay webhook activo (Cloudflare), Telegram no deja leer así: no pasa nada
+        print("getUpdates no disponible:", respuesta.get("description"))
+        return []
+    updates = respuesta.get("result", [])
     pulsaciones = []
     for u in updates:
         cq = u.get("callback_query")
