@@ -4,6 +4,20 @@ from telegram_bot import enviar_mensaje, limpiar_pendientes, esperar_boton
 from linkedin import publicar_post, dias_hasta_caducar
 from recolector import guardar_en_historial
 import re
+import json
+import os
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+
+def post_programado_de_hoy():
+    """Si hay un post especial para hoy en posts_programados.json, lo devuelve."""
+    if not os.path.exists("posts_programados.json"):
+        return None
+    with open("posts_programados.json", encoding="utf-8") as f:
+        programados = json.load(f)
+    hoy = datetime.now(ZoneInfo("Europe/Madrid")).date().isoformat()
+    return programados.get(hoy)
 
 
 def ejecutar_agente(max_intentos=3):
@@ -16,6 +30,24 @@ def ejecutar_agente(max_intentos=3):
     elif dias <= 7:
         enviar_mensaje(f"⏰ El permiso de LinkedIn caduca en {dias} días. "
                        "Ejecuta autorizar_linkedin.py cuando puedas.")
+
+    # ¿Hay un post especial programado para hoy?
+    especial = post_programado_de_hoy()
+    if especial:
+        enviar_mensaje(f"📌 Hoy toca post especial:\n\n{especial}\n\n"
+                       "(🔄 Otro = publicar una noticia normal en su lugar)", con_botones=True)
+        decision = esperar_boton()
+        print(f"Post especial - has elegido: {decision}")
+        if decision == "publicar":
+            ok, mensaje = publicar_post(especial)
+            enviar_mensaje("✅ ¡Post especial publicado!" if ok else
+                           f"⚠️ No se pudo publicar ({mensaje}). Cópialo y pégalo a mano.")
+            print(mensaje)
+            return
+        elif decision != "regenerar":
+            enviar_mensaje("❌ Descartado. Hoy no se publica nada.")
+            return
+        # si pulsas 🔄, sigue con una noticia normal
 
     descartados = []  # borradores que has rechazado
 
