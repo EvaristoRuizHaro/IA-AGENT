@@ -18,13 +18,41 @@ def dias_hasta_caducar():
     return (date.fromisoformat(CADUCA) - date.today()).days
 
 
+# Menciones: en el texto se escriben como @[Nombre](urn:li:organization:12345)
+MENCION = re.compile(r"@\[([^\]]+)\]\((urn:li:organization:\d+)\)")
+
+
+def preparar_menciones(texto):
+    """Quita la marca de las menciones y devuelve (texto limpio, etiquetas para LinkedIn).
+    Si la URN aún no tiene número, se queda solo el nombre, sin etiqueta."""
+    etiquetas = []
+    limpio = ""
+    pos = 0
+    for m in MENCION.finditer(texto):
+        limpio += texto[pos:m.start()]
+        # LinkedIn cuenta posiciones en unidades UTF-16 (los emojis cuentan doble)
+        inicio = len(limpio.encode("utf-16-le")) // 2
+        limpio += m.group(1)
+        etiquetas.append({
+            "start": inicio,
+            "length": len(m.group(1).encode("utf-16-le")) // 2,
+            "value": {"com.linkedin.common.CompanyAttributedEntity": {"company": m.group(2)}},
+        })
+        pos = m.end()
+    limpio += texto[pos:]
+    # Menciones sin número todavía: dejamos solo el nombre
+    limpio = re.sub(r"@\[([^\]]+)\]\([^)]*\)", r"\1", limpio)
+    return limpio, etiquetas
+
+
 def publicar_post(texto):
     """Publica el texto en tu perfil. Devuelve (True/False, mensaje)."""
+    texto, etiquetas = preparar_menciones(texto)
     # Buscamos el enlace de la noticia dentro del post para que salga con vista previa
     enlace = re.search(r"https?://\S+", texto)
 
     contenido = {
-        "shareCommentary": {"text": texto},
+        "shareCommentary": {"text": texto, "attributes": etiquetas},
         "shareMediaCategory": "NONE",
     }
     if enlace:
