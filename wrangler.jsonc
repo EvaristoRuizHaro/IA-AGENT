@@ -1,0 +1,8 @@
+// Configuración del Worker de Cloudflare (webhook de Telegram).
+// Le dice a Cloudflare que solo despliegue cloudflare/worker.js e ignore el resto (Python).
+{
+  "name": "agente-linkedin",
+  "main": "cloudflare/worker.js",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true }
+}
