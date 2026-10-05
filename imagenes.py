@@ -1,13 +1,16 @@
-# Genera la imagen que acompaña a cada post (una "tarjeta" de 1080x1080 con el titular).
-# Se crea a partir del propio texto del post, así que siempre sale igual: no hace falta guardarla.
+# Genera la imagen que acompaña a cada post: una obra abstracta de 1080x1080 (manchas de color
+# difuminadas, ondas y grano) con el titular encima. Cada post tiene su propia composición, que
+# sale del propio texto: siempre es la misma para el mismo post, así que no hace falta guardarla.
+import hashlib
+import math
 import os
 import re
 import tempfile
 import textwrap
 import unicodedata
-from urllib.parse import urlparse
 
-from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 from linkedin import preparar_menciones
 from recolector import cargar_config
@@ -16,15 +19,15 @@ CONFIG = cargar_config()
 CARPETA_FUENTES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fuentes")
 LADO = 1080
 MARGEN = 84
+BLANCO = (255, 255, 255)
 
-# Colores (fondo claro, tinta oscura y un color de acento por formato)
-FONDO, TINTA, TINTA_2, SUAVE, LINEA = "#fcfcfb", "#0b0b0b", "#52514e", "#8a8984", "#e4e3df"
+# Por formato: etiqueta y paleta (fondo oscuro, fondo claro y tres colores para las manchas)
 FORMATOS = {
-    "noticia":     ("NOTICIA",                  "#2a78d6"),
-    "destacada":   ("LA NOTICIA DE LA SEMANA",  "#4a3aa7"),
-    "truco":       ("TRUCO DE LA SEMANA",       "#1baf7a"),
-    "herramienta": ("HERRAMIENTA DE LA SEMANA", "#eb6834"),
-    "especial":    ("PROYECTO",                 "#e34948"),
+    "noticia":     ("NOTICIA",                  ["#0b1d3a", "#123d73", "#2a78d6", "#22c3e6", "#7b5cff"]),
+    "destacada":   ("LA NOTICIA DE LA SEMANA",  ["#170f3d", "#3a1f7a", "#7b5cff", "#e05fb0", "#4a90ff"]),
+    "truco":       ("TRUCO DE LA SEMANA",       ["#06231f", "#0b4a42", "#1baf7a", "#5ee0b5", "#2a9fd6"]),
+    "herramienta": ("HERRAMIENTA DE LA SEMANA", ["#2a0f0a", "#6b2412", "#eb6834", "#ffb347", "#e0457b"]),
+    "especial":    ("PROYECTO",                 ["#2a0a14", "#6e1530", "#e34948", "#ff9e5e", "#9b5cff"]),
 }
 # Prefijos que pone Gemini en la primera línea y que en la imagen ya van en la etiqueta
 PREFIJOS = r"^(la noticia (económica )?de la semana|truco de (python|sql|pandas)[^:]*|" \
@@ -33,6 +36,10 @@ PREFIJOS = r"^(la noticia (económica )?de la semana|truco de (python|sql|pandas
 
 def fuente(nombre, tam):
     return ImageFont.truetype(os.path.join(CARPETA_FUENTES, nombre), tam)
+
+
+def rgb(hex_):
+    return tuple(int(hex_[i:i + 2], 16) for i in (1, 3, 5))
 
 
 def sin_emojis(texto):
@@ -65,17 +72,67 @@ def ajustar(dibujo, texto, nombre_fuente, tam_max, tam_min, ancho, max_lineas):
     return f, lineas
 
 
+def fondo_artistico(paleta, semilla):
+    """Pinta el fondo: degradado, manchas de color difuminadas, ondas finas y grano."""
+    azar = np.random.default_rng(semilla)
+    oscuro, medio, *vivos = [np.array(rgb(c), dtype=float) for c in paleta]
+
+    # 1) Degradado diagonal en un ángulo distinto para cada post
+    ang = azar.uniform(0, 2 * math.pi)
+    yy, xx = np.mgrid[0:LADO, 0:LADO] / LADO
+    t = np.clip(((xx - 0.5) * math.cos(ang) + (yy - 0.5) * math.sin(ang)) + 0.5, 0, 1)[..., None]
+    lienzo = Image.fromarray((oscuro * (1 - t) + medio * t).astype(np.uint8))
+
+    # 2) Manchas grandes de color, muy difuminadas (efecto "aurora")
+    capa = Image.new("RGB", (LADO, LADO), (0, 0, 0))
+    d = ImageDraw.Draw(capa)
+    for i in range(5):
+        color = tuple(int(c) for c in vivos[i % len(vivos)])
+        r = azar.uniform(220, 420)
+        cx, cy = azar.uniform(0.1, 1.0) * LADO, azar.uniform(-0.1, 0.75) * LADO
+        d.ellipse([cx - r, cy - r * azar.uniform(0.6, 1), cx + r, cy + r], fill=color)
+    capa = capa.filter(ImageFilter.GaussianBlur(150))
+    lienzo = Image.blend(lienzo, Image.composite(capa, lienzo, capa.convert("L")), 0.85)
+
+    # 3) Ondas finas semitransparentes, como un flujo de datos
+    ondas = Image.new("RGBA", (LADO, LADO), (0, 0, 0, 0))
+    d = ImageDraw.Draw(ondas)
+    base, amp, frec = azar.uniform(0.25, 0.55) * LADO, azar.uniform(40, 110), azar.uniform(1.2, 2.6)
+    fase, giro = azar.uniform(0, 2 * math.pi), azar.uniform(-0.25, 0.25)
+    for k in range(26):
+        puntos = [(x, base + k * 9 + giro * x
+                   + amp * math.sin(frec * 2 * math.pi * x / LADO + fase + k * 0.12)
+                   + 0.35 * amp * math.sin(3.1 * 2 * math.pi * x / LADO + k * 0.3))
+                  for x in range(-20, LADO + 21, 12)]
+        d.line(puntos, fill=(255, 255, 255, 18 + int(30 * math.sin(math.pi * k / 25))), width=2)
+    lienzo = Image.alpha_composite(lienzo.convert("RGBA"), ondas)
+
+    # 4) Oscurecemos la parte de abajo para que el texto se lea bien
+    sombra = np.zeros((LADO, LADO, 4), dtype=np.uint8)
+    sombra[..., 3] = (np.clip((yy - 0.35) / 0.65, 0, 1) ** 1.4 * 190).astype(np.uint8)
+    lienzo = Image.alpha_composite(lienzo, Image.fromarray(sombra, "RGBA"))
+
+    # 5) Grano de película para un acabado menos "digital"
+    grano = azar.normal(0, 7, (LADO, LADO, 1))
+    arr = np.clip(np.array(lienzo.convert("RGB"), dtype=float) + grano, 0, 255).astype(np.uint8)
+    return Image.fromarray(arr)
+
+
 def generar_tarjeta(post, formato, ruta):
     post = preparar_menciones(post)[0]  # "@[Nombre](urn...)" → "Nombre"
-    etiqueta, acento = FORMATOS.get(formato, FORMATOS["noticia"])
-    img = Image.new("RGB", (LADO, LADO), FONDO)
-    d = ImageDraw.Draw(img)
+    etiqueta, paleta = FORMATOS.get(formato, FORMATOS["noticia"])
+    semilla = int(hashlib.md5(post.encode("utf-8")).hexdigest()[:8], 16)
+    img = fondo_artistico(paleta, semilla).convert("RGBA")
+    capa = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(capa)
     ancho = LADO - 2 * MARGEN
 
-    # Barra de color arriba y etiqueta del formato
-    d.rectangle([0, 0, LADO, 14], fill=acento)
-    d.rounded_rectangle([MARGEN, 96, MARGEN + 18, 114], radius=4, fill=acento)
-    d.text((MARGEN + 34, 105), etiqueta, font=fuente("DejaVuSans-Bold.ttf", 26), fill=TINTA_2, anchor="lm")
+    # Etiqueta del formato en una "píldora" translúcida
+    f_et = fuente("DejaVuSans-Bold.ttf", 24)
+    w = d.textlength(etiqueta, font=f_et)
+    d.rounded_rectangle([MARGEN, 84, MARGEN + w + 44, 132], radius=24,
+                        fill=(255, 255, 255, 40), outline=(255, 255, 255, 90), width=2)
+    d.text((MARGEN + 22, 108), etiqueta, font=f_et, fill=BLANCO, anchor="lm")
 
     # Titular: la primera línea del post, sin emojis ni prefijo
     lineas_post = [l for l in post.splitlines() if l.strip() and not l.strip().startswith("TEMA:")]
@@ -83,48 +140,47 @@ def generar_tarjeta(post, formato, ruta):
     titular = titular[:1].upper() + titular[1:]
     codigo = lineas_de_codigo(post) if formato == "truco" else []
 
-    f_tit, lineas = ajustar(d, titular, "DejaVuSans-Bold.ttf", 76, 44, ancho, 4 if codigo else 6)
-    alto_linea = int(f_tit.size * 1.22)
+    f_tit, lineas = ajustar(d, titular, "DejaVuSans-Bold.ttf", 78, 44, ancho, 4 if codigo else 6)
+    alto_linea = int(f_tit.size * 1.18)
     f_cod = fuente("DejaVuSansMono.ttf", 30)
     if codigo:
         while f_cod.size > 18 and max(d.textlength(l, font=f_cod) for l in codigo) > ancho - 64:
             f_cod = fuente("DejaVuSansMono.ttf", f_cod.size - 2)
     alto_caja = int(f_cod.size * 1.5) * len(codigo) + 56 if codigo else 0
-    # Centramos el bloque (titular + código o dominio) entre la etiqueta y el pie
-    alto_bloque = alto_linea * len(lineas) + (40 + alto_caja if codigo else 70)
-    y = max(180, (170 + LADO - 150 - alto_bloque) // 2)
+
+    # El texto va abajo, apoyado sobre el pie (como la portada de una revista)
+    pie_y = LADO - 96
+    y = pie_y - 70 - (alto_caja + 44 if codigo else 0) - alto_linea * len(lineas)
     for l in lineas:
-        d.text((MARGEN, y), l, font=f_tit, fill=TINTA)
+        d.text((MARGEN + 3, y + 4), l, font=f_tit, fill=(0, 0, 0, 90))  # sombra suave
+        d.text((MARGEN, y), l, font=f_tit, fill=BLANCO)
         y += alto_linea
 
     if codigo:
-        # Caja de código con fuente monoespaciada
-        y += 40
-        d.rounded_rectangle([MARGEN, y, LADO - MARGEN, y + alto_caja], radius=16, fill="#1a1a19")
+        # Caja de código translúcida ("cristal")
+        y += 44
+        d.rounded_rectangle([MARGEN, y, LADO - MARGEN, y + alto_caja], radius=18,
+                            fill=(10, 12, 16, 170), outline=(255, 255, 255, 50), width=2)
         yy = y + 28
         for l in codigo:
-            texto = l if d.textlength(l, font=f_cod) <= ancho - 64 else l[:int((ancho - 64) / (f_cod.size * 0.6)) - 1] + "…"
-            d.text((MARGEN + 32, yy), texto, font=f_cod, fill="#e8e6dc")
+            limite = int((ancho - 64) / (f_cod.size * 0.6)) - 1
+            texto = l if d.textlength(l, font=f_cod) <= ancho - 64 else l[:limite] + "…"
+            d.text((MARGEN + 32, yy), texto, font=f_cod, fill=(232, 230, 220, 255))
             yy += int(f_cod.size * 1.5)
-    else:
-        # Debajo del titular, de dónde viene (en las noticias y herramientas con enlace)
-        enlace = re.search(r"https?://\S+", post)
-        if enlace:
-            dominio = urlparse(enlace.group(0)).netloc.removeprefix("www.")
-            d.text((MARGEN, y + 30), dominio, font=fuente("DejaVuSans.ttf", 30), fill=SUAVE)
 
-    # Pie: nombre del autor
-    d.line([MARGEN, LADO - 130, LADO - MARGEN, LADO - 130], fill=LINEA, width=2)
-    d.text((MARGEN, LADO - 82), CONFIG.get("firma", CONFIG["nombre"]),
-           font=fuente("DejaVuSans-Bold.ttf", 28), fill=TINTA_2, anchor="lm")
-    d.text((LADO - MARGEN, LADO - 82), CONFIG.get("subtitulo_imagen", ""),
-           font=fuente("DejaVuSans.ttf", 24), fill=SUAVE, anchor="rm")
-    img.save(ruta)
+    # Pie: firma y subtítulo
+    d.line([MARGEN, pie_y - 34, MARGEN + 64, pie_y - 34], fill=(255, 255, 255, 200), width=4)
+    d.text((MARGEN, pie_y), CONFIG.get("firma", CONFIG["nombre"]),
+           font=fuente("DejaVuSans-Bold.ttf", 26), fill=(255, 255, 255, 235), anchor="lm")
+    d.text((LADO - MARGEN, pie_y), CONFIG.get("subtitulo_imagen", ""),
+           font=fuente("DejaVuSans.ttf", 24), fill=(255, 255, 255, 170), anchor="rm")
+
+    Image.alpha_composite(img, capa).convert("RGB").save(ruta)
     return ruta
 
 
 def imagen_del_post(post, formato, imagen=None):
-    """Devuelve la ruta de la imagen del post: la indicada (posts especiales) o una tarjeta generada.
+    """Devuelve la ruta de la imagen del post: la indicada (posts especiales) o una generada.
     Devuelve None si las imágenes están desactivadas en config.json o algo falla."""
     if not CONFIG.get("imagenes", True):
         return None
@@ -144,7 +200,7 @@ if __name__ == "__main__":
         "noticia": "🚀 OpenAI presenta un modelo que razona sobre vídeos largos\n\nTexto...\nhttps://www.theverge.com/ai/123",
         "destacada": "📌 La noticia de la semana: la UE aprueba las normas de transparencia para modelos de IA generativa\n\nhttps://huggingface.co/blog/x",
         "truco": "💡 Truco de pandas: cuenta valores en una línea\n\nResuelve...\n\nimport pandas as pd\ndf = pd.DataFrame({'equipo': ['A', 'B', 'A']})\nprint(df['equipo'].value_counts())\n\n¿Lo conocíais?",
-        "herramienta": "🛠️ Herramienta de la semana: DuckDB\n\nTexto...\nhttps://duckdb.org",
+        "herramienta": "🛠️ Herramienta de la semana: DuckDB, SQL analítico rapidísimo sin servidor\n\nTexto...\nhttps://duckdb.org",
     }
     for formato, post in ejemplos.items():
         print(generar_tarjeta(post, formato, f"ejemplo_{formato}.png"))

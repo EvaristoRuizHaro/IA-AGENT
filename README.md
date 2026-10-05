@@ -116,7 +116,7 @@ Proyecto de **Evaristo Ruiz Haro** · Especialización en Inteligencia Artificia
 
 ## Imágenes
 
-Cada post lleva una imagen de 1080x1080 que se genera sola a partir del titular (`imagenes.py`), con un color por formato y el código del truco en los miércoles. Los posts especiales pueden llevar su propia imagen:
+Cada post lleva una imagen abstracta de 1080x1080 (degradado, manchas de color, ondas y grano) con el titular encima, generada a partir del propio post (`imagenes.py`). Cada formato tiene su paleta y los trucos muestran el código. Los posts especiales pueden llevar su propia imagen:
 
 ```json
 "2026-10-06": {"texto": "...", "imagen": "imagenes/porra_backtest.png"}
