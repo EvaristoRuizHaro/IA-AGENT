@@ -1,13 +1,13 @@
 # 🤖 Agente de noticias de IA para LinkedIn
 
-Agente en Python que, dos veces por semana, busca las noticias más recientes sobre
+Agente en Python que, cada día a las 12:00, busca las noticias más recientes sobre
 Inteligencia Artificial y programación, elige la más relevante con un LLM, redacta un
 post y lo publica en LinkedIn **tras mi aprobación por Telegram**.
 
 ## Cómo funciona
 
 ```
-GitHub Actions (mar/jue) → Recolector RSS → Gemini elige y redacta → Telegram (✅ 🔄 ❌) → LinkedIn API
+GitHub Actions (diario 12:00) → Recolector RSS → Gemini elige y redacta → Telegram (✅ 🔄 ❌) → LinkedIn API
 ```
 
 1. **Recolector** (`recolector.py`): lee feeds RSS de Hugging Face, The Verge y Hacker News.

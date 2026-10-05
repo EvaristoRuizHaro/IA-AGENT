@@ -2,6 +2,8 @@
 from redactor import redactar_post
 from telegram_bot import enviar_mensaje, limpiar_pendientes, esperar_boton
 from linkedin import publicar_post, dias_hasta_caducar
+from recolector import guardar_en_historial
+import re
 
 
 def ejecutar_agente(max_intentos=3):
@@ -30,6 +32,9 @@ def ejecutar_agente(max_intentos=3):
         if decision == "publicar":
             ok, mensaje = publicar_post(post)
             if ok:
+                enlace = re.search(r"https?://\S+", post)
+                if enlace:
+                    guardar_en_historial(enlace.group(0))
                 enviar_mensaje("✅ ¡Publicado en LinkedIn!")
             else:
                 enviar_mensaje(f"⚠️ No se pudo publicar ({mensaje}).\n"
