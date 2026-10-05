@@ -24,10 +24,10 @@ def ejecutar_agente(max_intentos=3):
     especial, imagen = post_programado()
     if especial:
         imagen = imagen_del_post(especial, "especial", imagen)
-        if imagen:
-            enviar_foto(imagen, "🖼️ Imagen que acompañará al post")
+        id_foto = enviar_foto(imagen, "🖼️ Imagen del post (en LinkedIn saldrán juntos en una sola publicación)") if imagen else None
         enviar_mensaje(f"📌 Hoy toca post especial:\n\n{especial}\n\n"
-                       "(🔄 Otro = publicar una noticia normal en su lugar)", con_botones=True)
+                       "(🔄 Otro = publicar una noticia normal en su lugar)", con_botones=True,
+                       responder_a=id_foto)
         decision = esperar_boton()
         print(f"Post especial - has elegido: {decision}")
         if decision == "publicar":
@@ -51,9 +51,9 @@ def ejecutar_agente(max_intentos=3):
             return
 
         imagen = imagen_del_post(post, formato_de_hoy())
-        if imagen:
-            enviar_foto(imagen, "🖼️ Imagen que acompañará al post")
-        enviar_mensaje(f"📝 Borrador {intento} de {max_intentos}:\n\n{post}", con_botones=True)
+        id_foto = enviar_foto(imagen, "🖼️ Imagen del post (en LinkedIn saldrán juntos en una sola publicación)") if imagen else None
+        enviar_mensaje(f"📝 Borrador {intento} de {max_intentos}:\n\n{post}", con_botones=True,
+                       responder_a=id_foto)
         print("Borrador enviado a Telegram. Esperando tu respuesta...")
 
         decision = esperar_boton()

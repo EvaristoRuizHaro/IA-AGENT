@@ -16,9 +16,9 @@ if not post:
     sys.exit(1)
 
 ruta = imagen_del_post(post, "especial", imagen)
-if ruta:
-    enviar_foto(ruta, f"👀 Imagen del post del {fecha}")
+id_foto = enviar_foto(ruta, "🖼️ Imagen del post (en LinkedIn saldrán juntos en una sola publicación)") if ruta else None
 texto, etiquetas = preparar_menciones(post)
 nota = f"\n\n🏷️ Al publicar se etiquetará: {', '.join(texto[e['start']:e['start'] + e['length']] for e in etiquetas)}" if etiquetas else ""
-enviar_mensaje(f"👀 VISTA PREVIA del post del {fecha} (no se publica):\n\n{texto}{nota}")
+enviar_mensaje(f"👀 VISTA PREVIA del post del {fecha} (no se publica):\n\n{texto}{nota}",
+               responder_a=id_foto)
 print("Vista previa enviada.")

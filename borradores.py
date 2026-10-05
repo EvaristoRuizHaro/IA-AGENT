@@ -26,12 +26,12 @@ def crear_borrador(estado, post, clave, formato, descartados=None, intento=1, es
                    imagen=None):
     """Envía el borrador a Telegram (imagen + texto con botones) y lo guarda como pendiente."""
     ruta = imagen_del_post(post, "especial" if especial else formato, imagen)
-    if ruta:
-        enviar_foto(ruta, "🖼️ Imagen que acompañará al post")
+    id_foto = enviar_foto(ruta, "🖼️ Imagen del post (en LinkedIn saldrán juntos en una sola publicación)") if ruta else None
     etiqueta = "📌 Post especial" if especial else f"📝 Borrador ({formato})"
     message_id = enviar_mensaje(
         f"{etiqueta}:\n\n{preparar_menciones(post)[0]}\n\n⏳ Decide cuando quieras: este borrador no caduca.",
         con_botones=True,
+        responder_a=id_foto,
     )
     estado["borradores"][str(message_id)] = {
         "post": post,

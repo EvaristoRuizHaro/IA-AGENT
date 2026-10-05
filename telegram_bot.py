@@ -9,9 +9,12 @@ CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 API = f"https://api.telegram.org/bot{TOKEN}"
 
 
-def enviar_mensaje(texto, con_botones=False):
-    """Manda un mensaje a tu Telegram. Si con_botones=True, añade los 3 botones."""
+def enviar_mensaje(texto, con_botones=False, responder_a=None):
+    """Manda un mensaje a tu Telegram. Si con_botones=True, añade los 3 botones.
+    Con responder_a, el mensaje sale enganchado (como respuesta) a otro, p. ej. a su imagen."""
     datos = {"chat_id": CHAT_ID, "text": texto}
+    if responder_a:
+        datos["reply_parameters"] = {"message_id": responder_a, "allow_sending_without_reply": True}
     if con_botones:
         datos["reply_markup"] = {
             "inline_keyboard": [[
