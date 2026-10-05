@@ -1,46 +1,51 @@
-name: Agente LinkedIn
+name: Generar borrador
 
 on:
   schedule:
-    # Todos los días a las 12:00 hora de España.
-    # GitHub usa hora UTC, que no cambia con el horario de verano, así que
-    # programamos las dos horas posibles y el primer paso descarta la que no toca.
-    - cron: "0 10 * * *"   # 12:00 en horario de verano (UTC+2)
-    - cron: "0 11 * * *"   # 12:00 en horario de invierno (UTC+1)
-  workflow_dispatch:  # permite lanzarlo a mano con un botón desde GitHub
+    # Cada día a las 10:00 hora de España (aprox.).
+    # GitHub usa hora UTC, que no cambia con el horario de verano: programamos las dos
+    # horas posibles y el primer paso descarta la que no toca.
+    # Minuto 45 (no 00) porque a en punto GitHub va saturado y retrasa o salta ejecuciones.
+    - cron: "45 7 * * *"   # 09:45 en horario de verano (UTC+2)
+    - cron: "45 8 * * *"   # 09:45 en horario de invierno (UTC+1)
+  workflow_dispatch:  # botón para lanzarlo a mano
 
 permissions:
-  contents: write  # para poder guardar historial.json en el repositorio
+  contents: write  # para guardar pendientes.json e historial.json
+
+concurrency:
+  group: agente-linkedin   # nunca se ejecutan a la vez generar y revisar
+  cancel-in-progress: false
 
 jobs:
-  publicar:
+  generar:
     runs-on: ubuntu-latest
-    timeout-minutes: 75  # 1 hora esperando tu respuesta en Telegram + margen
-
+    timeout-minutes: 15
     steps:
       - name: Comprobar si toca ejecutar (verano/invierno)
         id: hora
         run: |
-          OFFSET=$(TZ=Europe/Madrid date +%z)   # +0200 en verano, +0100 en invierno
-          echo "Desfase de España ahora: $OFFSET | Disparador: '${{ github.event.schedule }}'"
+          OFFSET=$(TZ=Europe/Madrid date +%z)
           if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "toca=si" >> $GITHUB_OUTPUT     # lanzado a mano: siempre se ejecuta
-          elif [ "$OFFSET" = "+0200" ] && [ "${{ github.event.schedule }}" = "0 10 * * *" ]; then
             echo "toca=si" >> $GITHUB_OUTPUT
-          elif [ "$OFFSET" = "+0100" ] && [ "${{ github.event.schedule }}" = "0 11 * * *" ]; then
+          elif [ "$OFFSET" = "+0200" ] && [ "${{ github.event.schedule }}" = "45 7 * * *" ]; then
+            echo "toca=si" >> $GITHUB_OUTPUT
+          elif [ "$OFFSET" = "+0100" ] && [ "${{ github.event.schedule }}" = "45 8 * * *" ]; then
             echo "toca=si" >> $GITHUB_OUTPUT
           else
             echo "toca=no" >> $GITHUB_OUTPUT
             echo "Este disparador no corresponde a la hora actual de España. Se omite."
           fi
 
-      - name: Descargar el código
+      - uses: actions/checkout@v4
         if: steps.hora.outputs.toca == 'si'
-        uses: actions/checkout@v4
 
-      - name: Instalar Python
+      - name: Traer la última versión (por si otra ejecución acaba de guardar cambios)
         if: steps.hora.outputs.toca == 'si'
-        uses: actions/setup-python@v5
+        run: git pull --ff-only
+
+      - uses: actions/setup-python@v5
+        if: steps.hora.outputs.toca == 'si'
         with:
           python-version: "3.13"
 
@@ -48,7 +53,7 @@ jobs:
         if: steps.hora.outputs.toca == 'si'
         run: pip install -r requirements.txt
 
-      - name: Ejecutar el agente
+      - name: Generar borrador y enviarlo a Telegram
         if: steps.hora.outputs.toca == 'si'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -57,12 +62,12 @@ jobs:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
           LINKEDIN_TOKEN_CADUCA: ${{ secrets.LINKEDIN_TOKEN_CADUCA }}
-        run: python agente.py
+        run: python generar.py
 
-      - name: Guardar historial de noticias publicadas
+      - name: Guardar estado
         if: steps.hora.outputs.toca == 'si'
         run: |
           git config user.name "agente-linkedin[bot]"
           git config user.email "agente-linkedin@users.noreply.github.com"
-          git add historial.json
-          git diff --staged --quiet || (git commit -m "Historial: nueva noticia publicada" && git push)
+          git add pendientes.json historial.json
+          git diff --staged --quiet || (git commit -m "Nuevo borrador pendiente" && git pull --rebase && git push)

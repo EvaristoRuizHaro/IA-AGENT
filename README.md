@@ -1,6 +1,6 @@
 # 🤖 Agente de contenido para LinkedIn con IA
 
-Agente en Python que **cada día a las 12:00** prepara un post de LinkedIn sobre una temática
+Agente en Python que **cada día a las 10:00** prepara un post de LinkedIn sobre una temática
 configurable (IA, economía o la que quieras), te lo envía a **Telegram para que lo apruebes** y,
 si das el visto bueno, lo publica en tu perfil.
 
@@ -12,7 +12,8 @@ el mismo código funciona para cualquier persona y tema cambiando solo un archiv
 - 📰 Lee noticias recientes de varias fuentes RSS.
 - 🧠 Usa un LLM (Google Gemini) para elegir el contenido más relevante y redactar el post.
 - 📅 Cambia de formato según el día de la semana (noticia destacada, concepto o truco, herramienta...).
-- 📱 Envía el borrador a Telegram con botones **✅ Publicar · 🔄 Otro · ❌ Descartar**.
+- 📱 Envía el borrador a Telegram con botones **✅ Publicar · 🔄 Otro · ❌ Descartar**, y el borrador
+  queda pendiente hasta que decidas: puedes publicarlo cuando quieras.
 - 🔗 Publica en LinkedIn mediante su API oficial (OAuth 2.0).
 - 🗂️ Lleva un historial para no repetir noticias, temas ni herramientas.
 - ☁️ Se ejecuta solo en la nube con GitHub Actions, sin depender de ningún ordenador.
@@ -20,14 +21,17 @@ el mismo código funciona para cualquier persona y tema cambiando solo un archiv
 ## ⚙️ Cómo funciona
 
 ```
-GitHub Actions (12:00) → config.json → Formato del día → Gemini redacta → Telegram (✅ 🔄 ❌) → LinkedIn
+GitHub Actions (10:00) → config.json → Formato del día → Gemini redacta → Telegram (✅ 🔄 ❌) → LinkedIn
                                             ↑                                                  ↓
                                  Fuentes RSS / listas                                historial.json
 ```
 
 | Módulo | Función |
 |---|---|
-| `agente.py` | Orquesta todo el flujo: post especial del día, borradores, aprobación y publicación |
+| `generar.py` | Cada mañana: crea el borrador del día (o el post especial programado) y lo envía a Telegram |
+| `revisar.py` | Cada 10 min: lee los botones pulsados en Telegram y publica, regenera o descarta |
+| `borradores.py` | Guarda los borradores pendientes en `pendientes.json` |
+| `agente.py` | Modo local interactivo (ejecución manual desde el PC) |
 | `redactor.py` | Genera el post con Gemini según el formato del día. Tres tipos: `noticia`, `tema_libre` y `lista` |
 | `recolector.py` | Lee las fuentes RSS de `config.json` y gestiona el historial |
 | `telegram_bot.py` | Envía borradores con botones y espera la respuesta (*long polling*) |
@@ -60,6 +64,9 @@ instrucciones.
   reserva y se reintenta con espera progresiva.
 - **Configuración separada del código**: todo lo personal vive en `config.json`, lo que permite
   reutilizar el agente para cualquier persona y temática.
+- **Borradores sin caducidad**: un workflow genera el borrador y otro, cada 10 minutos, procesa
+  los botones pulsados. El estado se guarda en el propio repositorio, así que no hay que mantener
+  ningún servidor encendido esperando respuesta.
 - **Horario de verano/invierno**: GitHub Actions usa UTC, así que el workflow programa dos horas y
   descarta la que no corresponde según la hora de España.
 - **Coste cero**: plan gratuito de Gemini, Telegram, la API de LinkedIn y GitHub Actions.
@@ -96,7 +103,8 @@ Las claves se guardan en `.env` en local y como *Secrets* en GitHub; nunca se su
 ├── recursos_economia.json   # recursos para el tema "economia"
 ├── posts_programados.json   # posts especiales para fechas concretas
 ├── historial.json           # lo ya publicado (lo actualiza el propio workflow)
-└── .github/workflows/agente.yml
+├── pendientes.json          # borradores esperando tu decisión
+└── .github/workflows/       # agente.yml (generar a las 10:00) y revisar.yml (cada 10 min)
 ```
 
 ## 🛠️ Tecnologías

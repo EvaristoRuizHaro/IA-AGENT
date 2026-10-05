@@ -29,6 +29,8 @@ if input("\n¿Es una instalación nueva? Se vaciarán el historial y los posts p
         f.write("[]")
     with open("posts_programados.json", "w", encoding="utf-8") as f:
         f.write("{}")
+    with open("pendientes.json", "w", encoding="utf-8") as f:
+        f.write('{"offset": 0, "borradores": {}}')
     print("✅ Historial y posts programados vaciados.")
 
 print("\nSiguiente paso: rellena el .env y prueba con  python redactor.py")

@@ -20,7 +20,39 @@ def enviar_mensaje(texto, con_botones=False):
                 {"text": "❌ Descartar", "callback_data": "descartar"},
             ]]
         }
-    requests.post(f"{API}/sendMessage", json=datos)
+    r = requests.post(f"{API}/sendMessage", json=datos).json()
+    return r.get("result", {}).get("message_id")  # identificador del mensaje enviado
+
+
+def editar_mensaje(message_id, texto):
+    """Cambia el texto de un mensaje ya enviado y le quita los botones."""
+    requests.post(f"{API}/editMessageText",
+                  json={"chat_id": CHAT_ID, "message_id": message_id, "text": texto[:4000]})
+
+
+def leer_pulsaciones(offset=0):
+    """Devuelve los botones pulsados desde la última vez, sin esperar (para GitHub Actions)."""
+    params = {"timeout": 0, "allowed_updates": '["callback_query"]'}
+    if offset:
+        params["offset"] = offset
+    updates = requests.get(f"{API}/getUpdates", params=params, timeout=30).json().get("result", [])
+    pulsaciones = []
+    for u in updates:
+        cq = u.get("callback_query")
+        pulsaciones.append({
+            "update_id": u["update_id"],
+            "callback_id": cq["id"] if cq else None,
+            "accion": cq["data"] if cq else None,
+            "message_id": cq["message"]["message_id"] if cq and "message" in cq else None,
+        })
+    return pulsaciones
+
+
+def responder_pulsacion(callback_id, texto=""):
+    """Confirma a Telegram que hemos recibido la pulsación."""
+    if callback_id:
+        requests.post(f"{API}/answerCallbackQuery",
+                      json={"callback_query_id": callback_id, "text": texto})
 
 
 def limpiar_pendientes():
