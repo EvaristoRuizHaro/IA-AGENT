@@ -1,0 +1,25 @@
+name: Vista previa de post programado
+
+on:
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: "Fecha del post (AAAA-MM-DD)"
+        required: true
+
+jobs:
+  vista-previa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Enviar vista previa a Telegram (sin botones, no guarda nada)
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python vista_previa.py "${{ inputs.fecha }}"
