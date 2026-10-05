@@ -4,5 +4,7 @@
   "name": "agente-linkedin",
   "main": "cloudflare/worker.js",
   "compatibility_date": "2026-10-01",
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Conserva las variables creadas en el panel de Cloudflare al redesplegar
+  "keep_vars": true
 }
