@@ -32,6 +32,18 @@ GitHub Actions (diario 12:00) → Recolector RSS → Gemini elige y redacta → 
 
 El historial (`historial.json`) evita repetir noticias, trucos o herramientas.
 
+## Úsalo con tu propio tema
+
+Todo lo personal (nombre, perfil, tema, fuentes RSS y formato de cada día) está en `config.json`,
+así que el mismo código sirve para cualquier temática. Hay temas listos en `presets/`
+(`ia`, `economia`) y se crean nuevos copiando uno de ellos.
+
+```bash
+python configurar.py   # elige tema, nombre y perfil
+```
+
+Guía completa de instalación paso a paso: [GUIA_INSTALACION.md](GUIA_INSTALACION.md)
+
 ## Tecnologías
 
 Python · Google Gemini API · Telegram Bot API · LinkedIn API · OAuth 2.0 · GitHub Actions · RSS

@@ -2,7 +2,13 @@ import json
 import os
 import feedparser
 
-HISTORIAL = "historial.json"  # enlaces de noticias ya publicadas
+HISTORIAL = "historial.json"  # lo que ya se ha publicado (enlaces, temas, herramientas...)
+
+
+def cargar_config():
+    """Lee config.json: el nombre, el tema y las fuentes de cada persona."""
+    with open("config.json", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def cargar_historial():
@@ -12,23 +18,17 @@ def cargar_historial():
     return []
 
 
-def guardar_en_historial(enlace):
+def guardar_en_historial(clave):
     historial = cargar_historial()
-    historial.append(enlace)
+    historial.append(clave)
     with open(HISTORIAL, "w", encoding="utf-8") as f:
-        json.dump(historial[-200:], f, indent=2)  # guardamos solo los 200 últimos
+        json.dump(historial[-200:], f, indent=2, ensure_ascii=False)  # solo los 200 últimos
 
-# Webs de las que vamos a sacar noticias
-FUENTES = {
-    "Hugging Face": "https://huggingface.co/blog/feed.xml",
-    "The Verge (IA)": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
-    "Hacker News": "https://hnrss.org/frontpage",
-}
 
 def recoger_noticias():
     noticias = []
     ya_publicadas = set(cargar_historial())
-    for nombre, url in FUENTES.items():
+    for nombre, url in cargar_config()["fuentes"].items():
         feed = feedparser.parse(url)
         for entrada in feed.entries[:5]:  # las 5 más recientes de cada web
             if entrada.get("link", "") in ya_publicadas:
@@ -41,7 +41,13 @@ def recoger_noticias():
             })
     return noticias
 
+
 if __name__ == "__main__":
+    # Útil para comprobar qué fuentes funcionan
+    for nombre, url in cargar_config()["fuentes"].items():
+        n = len(feedparser.parse(url).entries)
+        print(f"{'✅' if n else '❌'} {nombre}: {n} noticias")
+    print()
     for n in recoger_noticias():
         print(f"[{n['fuente']}] {n['titulo']}")
         print(f"   {n['enlace']}\n")

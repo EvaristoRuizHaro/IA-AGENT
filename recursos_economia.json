@@ -1,0 +1,62 @@
+[
+  {
+    "nombre": "INE (Instituto Nacional de Estadística)",
+    "url": "https://www.ine.es",
+    "descripcion": "Organismo oficial que publica las estadísticas de España: IPC, paro (EPA), PIB, población, vivienda... con datos descargables gratis."
+  },
+  {
+    "nombre": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat",
+    "descripcion": "Oficina estadística de la Unión Europea: datos comparables entre países de la UE sobre economía, empleo, comercio y población."
+  },
+  {
+    "nombre": "Banco de España – Estadísticas",
+    "url": "https://www.bde.es",
+    "descripcion": "Publica estadísticas oficiales sobre tipos de interés, crédito, deuda, balanza de pagos y el sistema financiero español."
+  },
+  {
+    "nombre": "FRED",
+    "url": "https://fred.stlouisfed.org",
+    "descripcion": "Base de datos gratuita de la Reserva Federal de St. Louis con cientos de miles de series económicas, con gráficos y descarga de datos."
+  },
+  {
+    "nombre": "Tablas dinámicas de Excel",
+    "url": "https://support.microsoft.com/excel",
+    "descripcion": "Función de Excel para resumir, agrupar y analizar grandes tablas de datos en segundos, sin fórmulas complicadas."
+  },
+  {
+    "nombre": "Power BI",
+    "url": "https://www.microsoft.com/power-platform/products/power-bi",
+    "descripcion": "Herramienta de Microsoft para crear dashboards e informes interactivos a partir de Excel, bases de datos y otras fuentes."
+  },
+  {
+    "nombre": "Función GOOGLEFINANCE de Google Sheets",
+    "url": "https://support.google.com/docs/answer/3093281",
+    "descripcion": "Función de Google Sheets que trae a una hoja de cálculo cotizaciones y datos de mercado (actuales e históricos) de acciones y divisas."
+  },
+  {
+    "nombre": "Tableau Public",
+    "url": "https://public.tableau.com",
+    "descripcion": "Versión gratuita de Tableau para crear visualizaciones de datos interactivas y publicarlas en la web."
+  },
+  {
+    "nombre": "OECD Data Explorer",
+    "url": "https://data-explorer.oecd.org",
+    "descripcion": "Portal de datos de la OCDE con indicadores económicos y sociales comparables entre países miembros."
+  },
+  {
+    "nombre": "World Bank Open Data",
+    "url": "https://data.worldbank.org",
+    "descripcion": "Datos abiertos del Banco Mundial sobre desarrollo económico de casi todos los países del mundo."
+  },
+  {
+    "nombre": "CNMV",
+    "url": "https://www.cnmv.es",
+    "descripcion": "Comisión Nacional del Mercado de Valores: en su web se consultan gratis las cuentas anuales e información oficial de las empresas cotizadas españolas."
+  },
+  {
+    "nombre": "Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "descripcion": "Web gratuita con cotizaciones, gráficos históricos, estados financieros y noticias de empresas cotizadas de todo el mundo."
+  }
+]

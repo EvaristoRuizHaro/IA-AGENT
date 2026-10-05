@@ -1,0 +1,38 @@
+{
+  "nombre": "Evaristo",
+  "perfil": "estudiante de una especialización en Inteligencia Artificial y Big Data en España",
+  "publico": "un perfil junior de IA / Big Data / programación",
+  "fuentes": {
+    "Hugging Face": "https://huggingface.co/blog/feed.xml",
+    "The Verge (IA)": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+    "Hacker News": "https://hnrss.org/frontpage"
+  },
+  "dias": {
+    "0": "destacada",
+    "1": "noticia",
+    "2": "truco",
+    "3": "noticia",
+    "4": "herramienta",
+    "5": "noticia",
+    "6": "noticia"
+  },
+  "formatos": {
+    "noticia": {
+      "tipo": "noticia",
+      "instrucciones": "De la lista de noticias, elige LA MÁS interesante para {publico} y escribe un post sobre ella:\n- Primera línea: un gancho corto que dé ganas de seguir leyendo.\n- 2-3 líneas resumiendo la noticia (usa SOLO el título y el resumen).\n- 2-3 líneas con la opinión de {nombre}: qué significa para alguien que empieza en el sector.\n- Una pregunta final para invitar a comentar.\n- El enlace a la noticia."
+    },
+    "destacada": {
+      "tipo": "noticia",
+      "instrucciones": "Es lunes: toca \"la noticia de la semana\". De la lista, elige la noticia con MÁS IMPACTO para el sector de la IA y el desarrollo, y escribe un post:\n- Primera línea: empieza con \"📌 La noticia de la semana:\" seguido de un gancho.\n- 3-4 líneas explicando qué ha pasado y por qué es importante (usa SOLO el título y el resumen).\n- 2 líneas con la opinión de {nombre} y cómo puede afectar a quienes empiezan.\n- Una pregunta final para invitar a comentar.\n- El enlace a la noticia."
+    },
+    "truco": {
+      "tipo": "tema_libre",
+      "instrucciones": "Es miércoles: toca \"truco de la semana\". Escribe un post con un truco práctico y útil de Python, pandas, SQL o análisis de datos, pensado para estudiantes y juniors:\n- Primera línea: empieza con \"💡 Truco de Python:\" (o de SQL/pandas) seguido de un gancho.\n- 1-2 líneas explicando qué problema resuelve.\n- Un ejemplo de código CORTO (máximo 6 líneas), correcto y que funcione. Sin bloques markdown (```), solo las líneas de código, porque LinkedIn no los muestra.\n- 1-2 líneas explicando el resultado.\n- Una pregunta final (\"¿Lo conocíais?\", \"¿Qué truco añadiríais?\"...)."
+    },
+    "herramienta": {
+      "tipo": "lista",
+      "archivo": "herramientas.json",
+      "instrucciones": "Es viernes: toca \"herramienta de la semana\". Escribe un post recomendando la herramienta que te paso:\n- Primera línea: empieza con \"🛠️ Herramienta de la semana:\" y su nombre.\n- 2-3 líneas sobre qué es y para qué sirve (basado en la descripción que te doy).\n- 2 líneas con un caso de uso concreto para un estudiante de IA o datos.\n- Una pregunta final para invitar a comentar.\n- El enlace a la herramienta.\nNo inventes funcionalidades, versiones ni precios que no aparezcan en la descripción."
+    }
+  }
+}

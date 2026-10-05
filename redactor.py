@@ -9,35 +9,15 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-from recolector import recoger_noticias, cargar_historial
+from recolector import recoger_noticias, cargar_historial, cargar_config
 
-# Carga la clave de la API desde el archivo .env
 load_dotenv()
 cliente = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-# Modelos gratuitos de Google, en orden de preferencia.
-# Si el primero está saturado, se prueba el siguiente.
+# Modelos gratuitos de Google, en orden de preferencia (si uno está saturado, se prueba el siguiente)
 MODELOS = ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.5-flash"]
 
-# ---------------------------------------------------------------------------
-# QUÉ TIPO DE POST TOCA CADA DÍA (0 = lunes ... 6 = domingo). Cámbialo a tu gusto.
-#   "destacada"   -> la noticia más importante de la semana
-#   "noticia"     -> noticia del día + opinión
-#   "truco"       -> truco de Python / datos con un trozo de código
-#   "herramienta" -> herramienta recomendada (de herramientas.json)
-# ---------------------------------------------------------------------------
-FORMATOS = {
-    0: "destacada",
-    1: "noticia",
-    2: "truco",
-    3: "noticia",
-    4: "herramienta",
-    5: "noticia",
-    6: "noticia",
-}
-
-PERFIL = """Eres el redactor de LinkedIn de Evaristo, estudiante de una especialización
-en Inteligencia Artificial y Big Data en España. Sus posts deben ayudarle a mostrar
-interés y conocimiento ante recruiters."""
+# Todo lo personal (nombre, tema, fuentes, formatos por día) está en config.json
+CONFIG = cargar_config()
 
 REGLAS = """Reglas:
 - Escribe en español, tono cercano y profesional, nada de frases de vendehúmos ni exceso de emojis.
@@ -46,74 +26,38 @@ REGLAS = """Reglas:
 - Termina con 3-5 hashtags.
 - Devuelve únicamente lo que se te pide, sin explicaciones."""
 
-INSTRUCCIONES = {
-    "noticia": f"""{PERFIL}
+REGLA_TEMA = """La PRIMERA línea de tu respuesta debe ser "TEMA: <nombre corto del tema>",
+y a continuación, en una línea nueva, el post."""
 
-De la lista de noticias, elige LA MÁS interesante para un perfil junior de
-IA / Big Data / programación y escribe un post sobre ella:
-- Primera línea: un gancho corto que dé ganas de seguir leyendo.
-- 2-3 líneas resumiendo la noticia (usa SOLO el título y el resumen).
-- 2-3 líneas con la opinión de Evaristo: qué significa para alguien que empieza en IA.
-- Una pregunta final para invitar a comentar.
-- El enlace a la noticia.
-{REGLAS}""",
 
-    "destacada": f"""{PERFIL}
+def rellenar(texto):
+    """Sustituye {nombre}, {perfil} y {publico} por los datos de config.json."""
+    for campo in ("nombre", "perfil", "publico"):
+        texto = texto.replace("{" + campo + "}", CONFIG[campo])
+    return texto
 
-Es lunes: toca "la noticia de la semana". De la lista, elige la noticia con MÁS
-IMPACTO para el sector de la IA y el desarrollo, y escribe un post:
-- Primera línea: empieza con "📌 La noticia de la semana:" seguido de un gancho.
-- 3-4 líneas explicando qué ha pasado y por qué es importante (usa SOLO el título y el resumen).
-- 2 líneas con la opinión de Evaristo y cómo puede afectar a quienes empiezan.
-- Una pregunta final para invitar a comentar.
-- El enlace a la noticia.
-{REGLAS}""",
 
-    "truco": f"""{PERFIL}
-
-Es miércoles: toca "truco de la semana". Escribe un post con un truco práctico y
-útil de Python, pandas, SQL o análisis de datos, pensado para estudiantes y juniors:
-- Primera línea: empieza con "💡 Truco de Python:" (o de SQL/pandas) seguido de un gancho.
-- 1-2 líneas explicando qué problema resuelve.
-- Un ejemplo de código CORTO (máximo 6 líneas), correcto y que funcione. Sin bloques
-  markdown (```), solo las líneas de código, porque LinkedIn no los muestra.
-- 1-2 líneas explicando el resultado.
-- Una pregunta final ("¿Lo conocíais?", "¿Qué truco añadiríais?"...).
-La PRIMERA línea de tu respuesta debe ser "TEMA: <nombre corto del truco>", y a
-continuación, en una línea nueva, el post.
-{REGLAS}""",
-
-    "herramienta": f"""{PERFIL}
-
-Es viernes: toca "herramienta de la semana". Escribe un post recomendando la
-herramienta que te paso:
-- Primera línea: empieza con "🛠️ Herramienta de la semana:" y su nombre.
-- 2-3 líneas sobre qué es y para qué sirve (basado en la descripción que te doy).
-- 2 líneas con un caso de uso concreto para un estudiante de IA o datos.
-- Una pregunta final para invitar a comentar.
-- El enlace a la herramienta.
-No inventes funcionalidades, versiones ni precios que no aparezcan en la descripción.
-{REGLAS}""",
-}
+def instrucciones(formato, extra=""):
+    perfil = (f"Eres el redactor de LinkedIn de {CONFIG['nombre']}, {CONFIG['perfil']}. "
+              "Sus posts deben ayudarle a mostrar interés y conocimiento ante recruiters.")
+    return f"{perfil}\n\n{rellenar(CONFIG['formatos'][formato]['instrucciones'])}\n{extra}\n{REGLAS}"
 
 
 def formato_de_hoy():
     hoy = datetime.now(ZoneInfo("Europe/Madrid")).weekday()
-    return FORMATOS.get(hoy, "noticia")
+    return CONFIG["dias"].get(str(hoy), "noticia")
 
 
-def llamar_gemini(instrucciones, texto):
+def llamar_gemini(instrucciones_sistema, texto):
     """Envía el texto a Gemini, con modelos de reserva y reintentos si están saturados."""
     config = types.GenerateContentConfig(
-        system_instruction=instrucciones,
+        system_instruction=instrucciones_sistema,
         automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
     )
     for ronda in range(3):
         for modelo in MODELOS:
             try:
-                respuesta = cliente.models.generate_content(
-                    model=modelo, contents=texto, config=config
-                )
+                respuesta = cliente.models.generate_content(model=modelo, contents=texto, config=config)
                 print(f"(Generado con {modelo})")
                 return respuesta.text.strip()
             except Exception as error:
@@ -124,64 +68,69 @@ def llamar_gemini(instrucciones, texto):
     raise RuntimeError("Gemini no está disponible ahora mismo.")
 
 
-def post_noticia(formato, descartados):
+# --- Tres tipos de post ------------------------------------------------------
+
+def tipo_noticia(formato, descartados):
+    """Elige una noticia de las fuentes RSS y escribe sobre ella."""
     noticias = recoger_noticias()
+    if not noticias:
+        raise RuntimeError("no se ha podido leer ninguna noticia de las fuentes (revisa config.json)")
     texto = ""
     for i, n in enumerate(noticias, start=1):
-        texto += f"{i}. [{n['fuente']}] {n['titulo']}\n"
-        texto += f"   Resumen: {n['resumen']}\n"
-        texto += f"   Enlace: {n['enlace']}\n\n"
+        texto += f"{i}. [{n['fuente']}] {n['titulo']}\n   Resumen: {n['resumen']}\n   Enlace: {n['enlace']}\n\n"
     if descartados:
-        texto += "NO elijas la noticia de estos borradores ya rechazados:\n"
-        texto += "\n---\n".join(descartados)
+        texto += "NO elijas la noticia de estos borradores ya rechazados:\n" + "\n---\n".join(descartados)
 
-    post = llamar_gemini(INSTRUCCIONES[formato], texto)
+    post = llamar_gemini(instrucciones(formato), texto)
     enlace = re.search(r"https?://\S+", post)
-    clave = enlace.group(0) if enlace else None  # lo que se guarda en el historial
-    return post, clave
+    return post, (enlace.group(0) if enlace else None)
 
 
-def post_truco(descartados):
-    usados = [h[len("truco: "):] for h in cargar_historial() if h.startswith("truco: ")]
-    texto = "Escribe el truco de esta semana."
-    if usados or descartados:
-        texto += "\nNO repitas ninguno de estos temas: " + "; ".join(usados + descartados)
+def tipo_tema_libre(formato, descartados):
+    """La IA elige un tema (truco, concepto...) sin repetir los ya publicados."""
+    prefijo = f"{formato}: "
+    usados = [h[len(prefijo):] for h in cargar_historial() if h.startswith(prefijo)]
+    rechazados = [d[len(prefijo):] for d in descartados]
+    texto = "Escribe el post de esta semana."
+    if usados or rechazados:
+        texto += "\nNO repitas ninguno de estos temas: " + "; ".join(usados + rechazados)
 
-    respuesta = llamar_gemini(INSTRUCCIONES["truco"], texto)
-    # Separamos la línea "TEMA: ..." del post
+    respuesta = llamar_gemini(instrucciones(formato, REGLA_TEMA), texto)
     tema = "sin tema"
     if respuesta.upper().startswith("TEMA:"):
         primera, _, resto = respuesta.partition("\n")
         tema, respuesta = primera[5:].strip(), resto.strip()
-    return respuesta, f"truco: {tema}"
+    return respuesta, prefijo + tema
 
 
-def post_herramienta(descartados):
-    with open("herramientas.json", encoding="utf-8") as f:
-        herramientas = json.load(f)
-    usadas = {h[len("herramienta: "):] for h in cargar_historial() if h.startswith("herramienta: ")}
-    rechazadas = {d[len("herramienta: "):] for d in descartados}
+def tipo_lista(formato, descartados):
+    """Recorre una lista fija (herramientas, recursos...) sin repetir."""
+    prefijo = f"{formato}: "
+    with open(CONFIG["formatos"][formato]["archivo"], encoding="utf-8") as f:
+        elementos = json.load(f)
+    usados = {h[len(prefijo):] for h in cargar_historial() if h.startswith(prefijo)}
+    rechazados = {d[len(prefijo):] for d in descartados}
 
-    pendientes = [h for h in herramientas if h["nombre"] not in usadas | rechazadas]
-    if not pendientes:  # si ya se han recomendado todas, volvemos a empezar
-        pendientes = [h for h in herramientas if h["nombre"] not in rechazadas] or herramientas
-    h = pendientes[0]
+    pendientes = [e for e in elementos if e["nombre"] not in usados | rechazados]
+    if not pendientes:  # si ya salieron todos, volvemos a empezar
+        pendientes = [e for e in elementos if e["nombre"] not in rechazados] or elementos
+    e = pendientes[0]
 
-    texto = f"Herramienta: {h['nombre']}\nDescripción: {h['descripcion']}\nEnlace: {h['url']}"
-    return llamar_gemini(INSTRUCCIONES["herramienta"], texto), f"herramienta: {h['nombre']}"
+    texto = f"Nombre: {e['nombre']}\nDescripción: {e['descripcion']}\nEnlace: {e['url']}"
+    return llamar_gemini(instrucciones(formato), texto), prefijo + e["nombre"]
+
+
+TIPOS = {"noticia": tipo_noticia, "tema_libre": tipo_tema_libre, "lista": tipo_lista}
 
 
 def redactar_post(descartados=None, formato=None):
     """Devuelve (post, clave). 'clave' identifica el contenido para no repetirlo."""
     descartados = descartados or []
     formato = formato or formato_de_hoy()
-    print(f"Formato de hoy: {formato}")
+    tipo = CONFIG["formatos"][formato]["tipo"]
+    print(f"Formato de hoy: {formato} ({tipo})")
     try:
-        if formato == "truco":
-            return post_truco(descartados)
-        if formato == "herramienta":
-            return post_herramienta(descartados)
-        return post_noticia(formato, descartados)
+        return TIPOS[tipo](formato, descartados)
     except RuntimeError as error:
         return f"No se pudo generar el post: {error}", None
 
