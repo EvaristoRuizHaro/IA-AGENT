@@ -4,3 +4,4 @@ __pycache__/
 registro.log
 .wrangler/
 node_modules/
+ejemplo_*.png

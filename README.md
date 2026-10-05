@@ -113,3 +113,13 @@ Python · Google Gemini API · Telegram Bot API · LinkedIn API · OAuth 2.0 · 
 
 ---
 Proyecto de **Evaristo Ruiz Haro** · Especialización en Inteligencia Artificial y Big Data
+
+## Imágenes
+
+Cada post lleva una imagen de 1080x1080 que se genera sola a partir del titular (`imagenes.py`), con un color por formato y el código del truco en los miércoles. Los posts especiales pueden llevar su propia imagen:
+
+```json
+"2026-10-06": {"texto": "...", "imagen": "imagenes/porra_backtest.png"}
+```
+
+Para desactivarlas, pon `"imagenes": false` en `config.json`. Prueba el diseño con `python imagenes.py`.

@@ -3,6 +3,7 @@
 # - Si no (ejecución programada), lee las pulsaciones pendientes con getUpdates.
 import os
 
+from imagenes import imagen_del_post
 from borradores import cargar_estado, guardar_estado, crear_borrador
 from linkedin import publicar_post
 from recolector import guardar_en_historial
@@ -24,7 +25,9 @@ def procesar(estado, accion, message_id, callback_id=None):
 
     if accion == "publicar":
         editar_mensaje(mid, f"⏳ Publicando en LinkedIn...\n\n{post}")
-        ok, resultado = publicar_post(post)
+        imagen = imagen_del_post(post, "especial" if borrador["especial"] else borrador["formato"],
+                                 borrador.get("imagen"))
+        ok, resultado = publicar_post(post, imagen)
         if ok:
             if borrador["clave"]:
                 guardar_en_historial(borrador["clave"])
@@ -35,7 +38,8 @@ def procesar(estado, accion, message_id, callback_id=None):
             enviar_mensaje(f"⚠️ LinkedIn ha dado un error: {resultado}\n"
                            "Te lo reenvío para que lo intentes otra vez cuando quieras.")
             crear_borrador(estado, post, borrador["clave"], borrador["formato"],
-                           borrador["descartados"], borrador["intento"], borrador["especial"])
+                           borrador["descartados"], borrador["intento"], borrador["especial"],
+                           borrador.get("imagen"))
         print(resultado)
 
     elif accion == "regenerar":

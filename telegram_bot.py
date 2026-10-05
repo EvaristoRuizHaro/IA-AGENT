@@ -24,6 +24,14 @@ def enviar_mensaje(texto, con_botones=False):
     return r.get("result", {}).get("message_id")  # identificador del mensaje enviado
 
 
+def enviar_foto(ruta, pie=""):
+    """Manda una imagen a tu Telegram (con un pie de foto corto opcional)."""
+    with open(ruta, "rb") as f:
+        r = requests.post(f"{API}/sendPhoto", data={"chat_id": CHAT_ID, "caption": pie[:1000]},
+                          files={"photo": f}).json()
+    return r.get("result", {}).get("message_id")
+
+
 def editar_mensaje(message_id, texto):
     """Cambia el texto de un mensaje ya enviado y le quita los botones."""
     requests.post(f"{API}/editMessageText",

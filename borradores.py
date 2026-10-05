@@ -2,7 +2,8 @@
 import json
 import os
 
-from telegram_bot import enviar_mensaje
+from imagenes import imagen_del_post
+from telegram_bot import enviar_mensaje, enviar_foto
 from linkedin import preparar_menciones
 
 ARCHIVO = "pendientes.json"
@@ -21,8 +22,12 @@ def guardar_estado(estado):
         json.dump(estado, f, indent=2, ensure_ascii=False)
 
 
-def crear_borrador(estado, post, clave, formato, descartados=None, intento=1, especial=False):
-    """Envía el borrador a Telegram con botones y lo guarda como pendiente."""
+def crear_borrador(estado, post, clave, formato, descartados=None, intento=1, especial=False,
+                   imagen=None):
+    """Envía el borrador a Telegram (imagen + texto con botones) y lo guarda como pendiente."""
+    ruta = imagen_del_post(post, "especial" if especial else formato, imagen)
+    if ruta:
+        enviar_foto(ruta, "🖼️ Imagen que acompañará al post")
     etiqueta = "📌 Post especial" if especial else f"📝 Borrador ({formato})"
     message_id = enviar_mensaje(
         f"{etiqueta}:\n\n{preparar_menciones(post)[0]}\n\n⏳ Decide cuando quieras: este borrador no caduca.",
@@ -35,6 +40,7 @@ def crear_borrador(estado, post, clave, formato, descartados=None, intento=1, es
         "descartados": descartados or [],
         "intento": intento,
         "especial": especial,
+        "imagen": imagen,  # solo en posts especiales; las demás se generan al publicar
     }
     # Limitamos la cantidad de borradores guardados
     ids = sorted(estado["borradores"], key=int)

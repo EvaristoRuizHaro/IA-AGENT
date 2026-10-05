@@ -45,9 +45,38 @@ def preparar_menciones(texto):
     return limpio, etiquetas
 
 
-def publicar_post(texto):
-    """Publica el texto en tu perfil. Devuelve (True/False, mensaje)."""
+def subir_imagen(ruta):
+    """Sube una imagen a LinkedIn y devuelve su identificador (asset), o None si falla."""
+    cabeceras = {"Authorization": f"Bearer {TOKEN}", "X-Restli-Protocol-Version": "2.0.0"}
+    # 1) Pedimos a LinkedIn una dirección donde subirla
+    r = requests.post(
+        "https://api.linkedin.com/v2/assets?action=registerUpload",
+        headers=cabeceras,
+        json={"registerUploadRequest": {
+            "recipes": ["urn:li:digitalmediaRecipe:feedshare-image"],
+            "owner": AUTOR,
+            "serviceRelationships": [{"relationshipType": "OWNER",
+                                      "identifier": "urn:li:userGeneratedContent"}],
+        }},
+    )
+    if r.status_code not in (200, 201):
+        print("No se pudo preparar la subida de la imagen:", r.status_code, r.text[:300])
+        return None
+    valor = r.json()["value"]
+    url = valor["uploadMechanism"]["com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest"]["uploadUrl"]
+    # 2) Subimos los bytes de la imagen a esa dirección
+    with open(ruta, "rb") as f:
+        r = requests.put(url, data=f.read(), headers={"Authorization": f"Bearer {TOKEN}"})
+    if r.status_code not in (200, 201):
+        print("No se pudo subir la imagen:", r.status_code, r.text[:300])
+        return None
+    return valor["asset"]
+
+
+def publicar_post(texto, imagen=None):
+    """Publica el texto en tu perfil, con imagen si se indica. Devuelve (True/False, mensaje)."""
     texto, etiquetas = preparar_menciones(texto)
+    asset = subir_imagen(imagen) if imagen else None
     # Buscamos el enlace de la noticia dentro del post para que salga con vista previa
     enlace = re.search(r"https?://\S+", texto)
 
@@ -55,7 +84,11 @@ def publicar_post(texto):
         "shareCommentary": {"text": texto, "attributes": etiquetas},
         "shareMediaCategory": "NONE",
     }
-    if enlace:
+    if asset:
+        # Con imagen, el enlace queda en el texto (LinkedIn no permite imagen + vista previa)
+        contenido["shareMediaCategory"] = "IMAGE"
+        contenido["media"] = [{"status": "READY", "media": asset}]
+    elif enlace:
         contenido["shareMediaCategory"] = "ARTICLE"
         contenido["media"] = [{"status": "READY", "originalUrl": enlace.group(0)}]
 

@@ -1,5 +1,8 @@
 {
   "max_caracteres": 700,
+  "imagenes": true,
+  "firma": "Evaristo Ruiz Haro",
+  "subtitulo_imagen": "IA y Big Data",
   "nombre": "Evaristo",
   "perfil": "estudiante de una especialización en Inteligencia Artificial y Big Data en España",
   "publico": "un perfil junior de IA / Big Data / programación",
