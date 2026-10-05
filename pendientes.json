@@ -1,1 +1,13 @@
-{"offset": 0, "borradores": {}}
+{
+  "offset": 0,
+  "borradores": {
+    "17": {
+      "post": "📌 La noticia de la semana: los grandes estudios ya diseñan sus motores para programar codo con codo con la IA.\n\nDurante la Capcom Open Conference RE: 2026, el programador Satoshi Ishida presentó los planes del proyecto REX para evolucionar el RE Engine. La compañía plantea abiertamente un futuro de desarrollo donde humanos e inteligencia artificial colaboren en la creación de videojuegos y herramientas técnicas.\n\nPara quienes nos estamos formando en IA y desarrollo, esto confirma que el valor diferencial estará en saber integrarse en flujos de co-creación con modelos avanzados, adaptando nuestra forma de picar código.\n\n¿Cómo crees que cambiará el perfil del desarrollador con la llegada de la IA a los motores de producción?\n\n🔗 https://www.theverge.com/games/1004418/capcom-ai-game-development\n\n#InteligenciaArtificial #DesarrolloDeSoftware #BigData #Innovacion #MachineLearning",
+      "clave": "https://www.theverge.com/games/1004418/capcom-ai-game-development",
+      "formato": "destacada",
+      "descartados": [],
+      "intento": 1,
+      "especial": false
+    }
+  }
+}
