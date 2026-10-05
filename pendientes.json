@@ -1,12 +1,14 @@
 {
-  "offset": 0,
+  "offset": 519082892,
   "borradores": {
-    "17": {
-      "post": "📌 La noticia de la semana: los grandes estudios ya diseñan sus motores para programar codo con codo con la IA.\n\nDurante la Capcom Open Conference RE: 2026, el programador Satoshi Ishida presentó los planes del proyecto REX para evolucionar el RE Engine. La compañía plantea abiertamente un futuro de desarrollo donde humanos e inteligencia artificial colaboren en la creación de videojuegos y herramientas técnicas.\n\nPara quienes nos estamos formando en IA y desarrollo, esto confirma que el valor diferencial estará en saber integrarse en flujos de co-creación con modelos avanzados, adaptando nuestra forma de picar código.\n\n¿Cómo crees que cambiará el perfil del desarrollador con la llegada de la IA a los motores de producción?\n\n🔗 https://www.theverge.com/games/1004418/capcom-ai-game-development\n\n#InteligenciaArtificial #DesarrolloDeSoftware #BigData #Innovacion #MachineLearning",
-      "clave": "https://www.theverge.com/games/1004418/capcom-ai-game-development",
+    "18": {
+      "post": "📌 La noticia de la semana: hasta los agentes de IA más avanzados fallan cuando se enfrentan a la realidad de las bases de datos.\n\nMicrosoft ha publicado un análisis sobre agentes de IA que aseguran haber completado una tarea, pero cuyos resultados chocan directamente con lo que dictan las bases de datos. Esto demuestra que la autonomía de los modelos sigue enfrentándose a importantes límites técnicos de validación y contexto.\n\nComo estudiante de la especialización en Inteligencia Artificial y Big Data, creo que esto nos recuerda la importancia vital de entender la arquitectura de datos por debajo. No basta con desplegar un agente; hay que saber auditar y comprobar qué ocurre bajo el capó.\n\n¿Qué métodos utilizáis para validar que las respuestas de un agente automatizado son correctas?\n\n🔗 https://huggingface.co/blog/microsoft/thinkingbox\n\n#InteligenciaArtificial #BigData #MachineLearning #DataEngineering #DesarrolloDeSoftware",
+      "clave": "https://huggingface.co/blog/microsoft/thinkingbox",
       "formato": "destacada",
-      "descartados": [],
-      "intento": 1,
+      "descartados": [
+        "📌 La noticia de la semana: los grandes estudios ya diseñan sus motores para programar codo con codo con la IA.\n\nDurante la Capcom Open Conference RE: 2026, el programador Satoshi Ishida presentó los planes del proyecto REX para evolucionar el RE Engine. La compañía plantea abiertamente un futuro de desarrollo donde humanos e inteligencia artificial colaboren en la creación de videojuegos y herramientas técnicas.\n\nPara quienes nos estamos formando en IA y desarrollo, esto confirma que el valor diferencial estará en saber integrarse en flujos de co-creación con modelos avanzados, adaptando nuestra forma de picar código.\n\n¿Cómo crees que cambiará el perfil del desarrollador con la llegada de la IA a los motores de producción?\n\n🔗 https://www.theverge.com/games/1004418/capcom-ai-game-development\n\n#InteligenciaArtificial #DesarrolloDeSoftware #BigData #Innovacion #MachineLearning"
+      ],
+      "intento": 2,
       "especial": false
     }
   }
