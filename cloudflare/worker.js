@@ -24,7 +24,6 @@ export default {
     const update = await request.json();
     const cq = update.callback_query;
     if (!cq || !cq.message) return new Response("ok");
-    if (String(cq.message.chat.id) !== String(env.TELEGRAM_CHAT_ID)) return new Response("ok");
 
     const telegram = (metodo, datos) =>
       fetch(`https://api.telegram.org/bot${env.TELEGRAM_TOKEN}/${metodo}`, {
@@ -32,6 +31,23 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos),
       });
+
+    // Diagnóstico: si falta alguna variable o el chat no coincide, avisamos en Telegram
+    const faltan = ["TELEGRAM_TOKEN", "TELEGRAM_CHAT_ID", "GITHUB_TOKEN", "GITHUB_REPO"].filter((v) => !env[v]);
+    if (faltan.length) {
+      await telegram("answerCallbackQuery", {
+        callback_query_id: cq.id, show_alert: true,
+        text: `⚠️ Faltan variables en Cloudflare: ${faltan.join(", ")}`,
+      });
+      return new Response("ok");
+    }
+    if (String(cq.message.chat.id) !== String(env.TELEGRAM_CHAT_ID).trim()) {
+      await telegram("answerCallbackQuery", {
+        callback_query_id: cq.id, show_alert: true,
+        text: `⚠️ TELEGRAM_CHAT_ID en Cloudflare no coincide con este chat (${cq.message.chat.id})`,
+      });
+      return new Response("ok");
+    }
 
     // Botón de estado ("⏳ ..."): ya está en marcha, no hacemos nada más
     if (!TEXTOS[cq.data]) {
@@ -49,11 +65,11 @@ export default {
 
     // 2. Lanzar el workflow de GitHub con la acción
     const r = await fetch(
-      `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/revisar.yml/dispatches`,
+      `https://api.github.com/repos/${env.GITHUB_REPO.trim()}/actions/workflows/revisar.yml/dispatches`,
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+          Authorization: `Bearer ${env.GITHUB_TOKEN.trim()}`,
           Accept: "application/vnd.github+json",
           "User-Agent": "agente-linkedin",
           "Content-Type": "application/json",
@@ -68,7 +84,7 @@ export default {
     if (!r.ok) {
       await telegram("sendMessage", {
         chat_id: cq.message.chat.id,
-        text: `⚠️ No he podido avisar a GitHub (error ${r.status}). Revisa el GITHUB_TOKEN en Cloudflare.`,
+        text: `⚠️ No he podido avisar a GitHub (error ${r.status}): ${(await r.text()).slice(0, 200)}\nRevisa GITHUB_TOKEN y GITHUB_REPO en Cloudflare.`,
       });
     }
     return new Response("ok");
