@@ -21,6 +21,17 @@ GitHub Actions (diario 12:00) → Recolector RSS → Gemini elige y redacta → 
 5. **Orquestación** (`agente.py`) y **ejecución programada** con GitHub Actions
    (`.github/workflows/agente.yml`).
 
+## Formatos según el día
+
+| Día | Formato |
+|---|---|
+| Lunes | 📌 La noticia de la semana |
+| Miércoles | 💡 Truco de Python / datos con código |
+| Viernes | 🛠️ Herramienta de la semana (`herramientas.json`) |
+| Resto | Noticia del día + opinión |
+
+El historial (`historial.json`) evita repetir noticias, trucos o herramientas.
+
 ## Tecnologías
 
 Python · Google Gemini API · Telegram Bot API · LinkedIn API · OAuth 2.0 · GitHub Actions · RSS

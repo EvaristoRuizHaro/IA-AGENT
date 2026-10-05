@@ -1,0 +1,17 @@
+[
+  {"nombre": "Ollama", "url": "https://ollama.com", "descripcion": "Permite ejecutar modelos de lenguaje abiertos (Llama, Gemma, Mistral...) en tu propio ordenador desde la terminal, sin depender de la nube."},
+  {"nombre": "DuckDB", "url": "https://duckdb.org", "descripcion": "Base de datos analítica embebida: permite hacer consultas SQL directamente sobre archivos CSV, Parquet o DataFrames, sin instalar ningún servidor."},
+  {"nombre": "Streamlit", "url": "https://streamlit.io", "descripcion": "Permite crear aplicaciones web de datos (dashboards, demos de modelos) escribiendo solo Python."},
+  {"nombre": "Hugging Face Hub", "url": "https://huggingface.co", "descripcion": "Plataforma con cientos de miles de modelos, datasets y demos de IA abiertos que se pueden descargar y usar gratis."},
+  {"nombre": "Polars", "url": "https://pola.rs", "descripcion": "Librería de DataFrames escrita en Rust, muy rápida y con bajo consumo de memoria; alternativa moderna a pandas."},
+  {"nombre": "Google Colab", "url": "https://colab.research.google.com", "descripcion": "Notebooks de Python en el navegador, sin instalar nada, con acceso gratuito (limitado) a GPU."},
+  {"nombre": "Gradio", "url": "https://www.gradio.app", "descripcion": "Permite crear en pocas líneas de Python una interfaz web para probar un modelo de machine learning y compartirla."},
+  {"nombre": "scikit-learn", "url": "https://scikit-learn.org", "descripcion": "Librería de Python de machine learning clásico: clasificación, regresión, clustering, preprocesado y evaluación de modelos."},
+  {"nombre": "LM Studio", "url": "https://lmstudio.ai", "descripcion": "Aplicación de escritorio para descargar modelos de lenguaje y chatear con ellos en local, con interfaz gráfica."},
+  {"nombre": "Kaggle", "url": "https://www.kaggle.com", "descripcion": "Comunidad de ciencia de datos con miles de datasets, notebooks públicos y competiciones."},
+  {"nombre": "Apache Spark", "url": "https://spark.apache.org", "descripcion": "Motor de procesamiento distribuido para trabajar con grandes volúmenes de datos (Big Data), usable desde Python con PySpark."},
+  {"nombre": "Weights & Biases", "url": "https://wandb.ai", "descripcion": "Herramienta para registrar y comparar experimentos de machine learning: métricas, hiperparámetros y versiones de modelos."},
+  {"nombre": "LangChain", "url": "https://www.langchain.com", "descripcion": "Framework para construir aplicaciones y agentes basados en modelos de lenguaje (LLMs)."},
+  {"nombre": "Jupyter", "url": "https://jupyter.org", "descripcion": "Notebooks interactivos que combinan código, gráficos y texto; el estándar para explorar datos."},
+  {"nombre": "Docker", "url": "https://www.docker.com", "descripcion": "Permite empaquetar una aplicación con todas sus dependencias en un contenedor que funciona igual en cualquier máquina."}
+]

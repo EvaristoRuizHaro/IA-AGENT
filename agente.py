@@ -49,11 +49,14 @@ def ejecutar_agente(max_intentos=3):
             return
         # si pulsas 🔄, sigue con una noticia normal
 
-    descartados = []  # borradores que has rechazado
+    descartados = []  # lo que has rechazado hoy (para no volver a proponerlo)
 
     for intento in range(1, max_intentos + 1):
         print(f"Redactando borrador {intento}...")
-        post = redactar_post(descartados)
+        post, clave = redactar_post(descartados)
+        if post.startswith("No se pudo generar"):
+            enviar_mensaje(f"⚠️ {post} Hoy no se publica nada.")
+            return
 
         enviar_mensaje(f"📝 Borrador {intento} de {max_intentos}:\n\n{post}", con_botones=True)
         print("Borrador enviado a Telegram. Esperando tu respuesta...")
@@ -64,9 +67,8 @@ def ejecutar_agente(max_intentos=3):
         if decision == "publicar":
             ok, mensaje = publicar_post(post)
             if ok:
-                enlace = re.search(r"https?://\S+", post)
-                if enlace:
-                    guardar_en_historial(enlace.group(0))
+                if clave:
+                    guardar_en_historial(clave)
                 enviar_mensaje("✅ ¡Publicado en LinkedIn!")
             else:
                 enviar_mensaje(f"⚠️ No se pudo publicar ({mensaje}).\n"
@@ -74,8 +76,9 @@ def ejecutar_agente(max_intentos=3):
             print(mensaje)
             return
         elif decision == "regenerar":
-            descartados.append(post)
-            enviar_mensaje("🔄 Vale, busco otra noticia...")
+            # Para noticias pasamos el borrador entero; para trucos/herramientas, su clave
+            descartados.append(post if clave is None or clave.startswith("http") else clave)
+            enviar_mensaje("🔄 Vale, preparo otro...")
             continue
         else:  # descartar o sin respuesta
             enviar_mensaje("❌ Descartado. Hoy no se publica nada.")
