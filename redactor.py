@@ -19,11 +19,15 @@ MODELOS = ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.5-flash"
 # Todo lo personal (nombre, tema, fuentes, formatos por día) está en config.json
 CONFIG = cargar_config()
 
-REGLAS = """Reglas:
+# Longitud máxima del post (se cambia en config.json con "max_caracteres")
+MAX_CARACTERES = CONFIG.get("max_caracteres", 1300)
+
+REGLAS = f"""Reglas:
 - Escribe en español, tono cercano y profesional, nada de frases de vendehúmos ni exceso de emojis.
 - No inventes cifras, fechas, precios ni datos que no te haya dado.
-- Máximo 1.300 caracteres.
-- Termina con 3-5 hashtags.
+- Máximo {MAX_CARACTERES} caracteres en total. Frases cortas y directas, sin relleno: mejor que sobre que falte.
+- Deja una línea en blanco entre bloques para que se lea fácil en el móvil.
+- Termina con 3 hashtags.
 - Devuelve únicamente lo que se te pide, sin explicaciones."""
 
 REGLA_TEMA = """La PRIMERA línea de tu respuesta debe ser "TEMA: <nombre corto del tema>",
