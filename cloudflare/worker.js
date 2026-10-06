@@ -13,6 +13,38 @@ const TEXTOS = {
 };
 
 export default {
+  // Despertador diario (ver "triggers" en wrangler.jsonc). Hay dos horas en UTC para cubrir
+  // verano e invierno; solo actúa la que cae a las 09:xx en Madrid.
+  async scheduled(event, env) {
+    const hora = new Intl.DateTimeFormat("es-ES", {
+      timeZone: "Europe/Madrid", hour: "2-digit", hourCycle: "h23",
+    }).format(new Date(event.scheduledTime));
+    if (hora !== "09") return;
+    const r = await fetch(
+      `https://api.github.com/repos/${env.GITHUB_REPO.trim()}/actions/workflows/agente.yml/dispatches`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${env.GITHUB_TOKEN.trim()}`,
+          Accept: "application/vnd.github+json",
+          "User-Agent": "agente-linkedin",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ref: "main", inputs: { auto: "si" } }),
+      }
+    );
+    if (!r.ok) {
+      await fetch(`https://api.telegram.org/bot${env.TELEGRAM_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: env.TELEGRAM_CHAT_ID,
+          text: `⚠️ El despertador de Cloudflare no ha podido lanzar el borrador (error ${r.status}). Lánzalo a mano en GitHub → Actions → Generar borrador.`,
+        }),
+      });
+    }
+  },
+
   async fetch(request, env) {
     if (request.method !== "POST") return new Response("El webhook está funcionando ✅");
 

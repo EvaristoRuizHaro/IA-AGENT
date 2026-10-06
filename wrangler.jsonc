@@ -6,5 +6,8 @@
   "compatibility_date": "2026-10-01",
   "observability": { "enabled": true },
   // Conserva las variables creadas en el panel de Cloudflare al redesplegar
-  "keep_vars": true
+  "keep_vars": true,
+  // Despertador: Cloudflare lanza "Generar borrador" a las 09:50 de Madrid (verano e invierno).
+  // Es mucho más puntual que los horarios de GitHub; si GitHub ya lo generó, no se repite.
+  "triggers": { "crons": ["50 7 * * *", "50 8 * * *"] }
 }

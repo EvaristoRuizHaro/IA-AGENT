@@ -2,16 +2,24 @@ name: Generar borrador
 
 on:
   schedule:
-    # Cada día a las 10:00 hora de España (aprox.).
-    # GitHub usa hora UTC, que no cambia con el horario de verano: programamos las dos
-    # horas posibles y el primer paso descarta la que no toca.
-    # Minuto 45 (no 00) porque a en punto GitHub va saturado y retrasa o salta ejecuciones.
-    - cron: "45 7 * * *"   # 09:45 en horario de verano (UTC+2)
-    - cron: "45 8 * * *"   # 09:45 en horario de invierno (UTC+1)
-  workflow_dispatch:  # botón para lanzarlo a mano
+    # Cada día hacia las 10:00 hora de España. GitHub a veces se salta o retrasa estas
+    # ejecuciones, así que hay varios intentos (y el webhook de Cloudflare lanza otro):
+    # el primero que llega a partir de las 09:30 de Madrid genera el borrador y los demás
+    # ven que hoy ya se generó y no hacen nada.
+    - cron: "45 7 * * *"   # 09:45 en verano / 08:45 en invierno (en invierno se ignora)
+    - cron: "45 8 * * *"   # 10:45 en verano / 09:45 en invierno
+    - cron: "17 10 * * *"  # repesca: 12:17 en verano / 11:17 en invierno
+    - cron: "17 13 * * *"  # repesca: 15:17 en verano / 14:17 en invierno
+  workflow_dispatch:       # botón para lanzarlo a mano (siempre genera)
+    inputs:
+      auto:
+        description: "Lo pone el Worker de Cloudflare: 'si' = solo si hoy no se ha generado ya"
+        required: false
+        default: ""
 
 permissions:
   contents: write  # para guardar pendientes.json e historial.json
+  actions: read    # para ver si hoy ya se generó el borrador
 
 concurrency:
   group: agente-linkedin   # nunca se ejecutan a la vez generar y revisar
@@ -22,20 +30,31 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Comprobar si toca ejecutar (verano/invierno)
+      - name: Comprobar si toca ejecutar
         id: hora
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          OFFSET=$(TZ=Europe/Madrid date +%z)
-          if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "toca=si" >> $GITHUB_OUTPUT
-          elif [ "$OFFSET" = "+0200" ] && [ "${{ github.event.schedule }}" = "45 7 * * *" ]; then
-            echo "toca=si" >> $GITHUB_OUTPUT
-          elif [ "$OFFSET" = "+0100" ] && [ "${{ github.event.schedule }}" = "45 8 * * *" ]; then
-            echo "toca=si" >> $GITHUB_OUTPUT
-          else
-            echo "toca=no" >> $GITHUB_OUTPUT
-            echo "Este disparador no corresponde a la hora actual de España. Se omite."
+          HORA=$(TZ=Europe/Madrid date +%H%M)
+          echo "Hora Madrid: $HORA | Evento: ${{ github.event_name }} | auto: '${{ inputs.auto }}'"
+          # Lanzado a mano desde GitHub: siempre genera
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.auto }}" != "si" ]; then
+            echo "toca=si" >> $GITHUB_OUTPUT; exit 0
           fi
+          if [ "$HORA" -lt 0930 ]; then
+            echo "toca=no" >> $GITHUB_OUTPUT; echo "Aún no son las 09:30 en Madrid. Se omite."; exit 0
+          fi
+          # ¿Alguna ejecución de hoy ya generó el borrador?
+          HOY=$(TZ=Europe/Madrid date +%F)
+          for id in $(gh run list -R "${{ github.repository }}" -w agente.yml -s success -L 20 \
+                        --json databaseId,createdAt -q '.[] | select(.createdAt >= "'"$(date -u -d "$HOY 00:00 $(TZ=Europe/Madrid date +%z)" +%FT%TZ)"'") | .databaseId'); do
+            if gh run view "$id" -R "${{ github.repository }}" --json jobs \
+                 -q '.jobs[].steps[] | select(.name=="Generar borrador y enviarlo a Telegram" and .conclusion=="success") | .name' \
+                 | grep -q .; then
+              echo "toca=no" >> $GITHUB_OUTPUT; echo "Hoy ya se generó el borrador (ejecución $id). Se omite."; exit 0
+            fi
+          done
+          echo "toca=si" >> $GITHUB_OUTPUT
 
       - uses: actions/checkout@v4
         if: steps.hora.outputs.toca == 'si'

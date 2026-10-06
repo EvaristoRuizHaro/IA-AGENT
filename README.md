@@ -1,6 +1,6 @@
 # 🤖 Agente de contenido para LinkedIn con IA
 
-Agente en Python que **cada día a las 10:00** prepara un post de LinkedIn sobre una temática
+Agente en Python que **cada día hacia las 10:00** prepara un post de LinkedIn sobre una temática
 configurable (IA, economía o la que quieras), te lo envía a **Telegram para que lo apruebes** y,
 si das el visto bueno, lo publica en tu perfil.
 
