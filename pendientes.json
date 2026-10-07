@@ -10,6 +10,15 @@
       ],
       "intento": 2,
       "especial": false
+    },
+    "36": {
+      "post": "💡 Truco de pandas: Convierte cadenas de texto en fechas con to_datetime.\n\nEvita errores al analizar series temporales convirtiendo columnas de texto al formato correcto de una sola vez.\n\ndf['fecha'] = pd.to_datetime(df['fecha'])\n\nTendrás una columna de tipo datetime lista para filtrar, agrupar y extraer años o meses sin complicaciones.\n\n¿Conocíais este método?\n\n#DataScience #Python #Pandas",
+      "clave": "truco: Truco de pandas",
+      "formato": "truco",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
