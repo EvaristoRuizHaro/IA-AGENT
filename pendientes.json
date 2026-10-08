@@ -19,6 +19,15 @@
       "intento": 1,
       "especial": false,
       "imagen": null
+    },
+    "38": {
+      "post": "¿Adiós a las interfaces estáticas en la IA?\n\nGoogle is launching a \"universal\" Gemini AI agent that can work across apps and devices in the background, available within the Gemini Enterprise app for users to chat and assign tasks from a single interface.\n\nMe parece un gran avance hacia la productividad real, integrando agentes autónomos en el día a día profesional.\n\n¿Cómo creéis que cambiará esto la forma en que interactuamos con el software corporativo?\n\nhttps://www.theverge.com/tech/1007904/google-gemini-ai-agent-enterprise\n\n#ArtificialIntelligence #BigData #MachineLearning",
+      "clave": "https://www.theverge.com/tech/1007904/google-gemini-ai-agent-enterprise",
+      "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
