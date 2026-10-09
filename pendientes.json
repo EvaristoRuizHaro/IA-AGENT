@@ -28,6 +28,15 @@
       "intento": 1,
       "especial": false,
       "imagen": null
+    },
+    "40": {
+      "post": "🛠️ Herramienta de la semana: Ollama.\n\nEs una aplicación que permite ejecutar modelos de lenguaje abiertos como Llama, Gemma o Mistral directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nMe resulta muy útil para realizar pruebas locales con LLMs mientras desarrollo proyectos de IA sin consumir recursos externos ni comprometer datos.\n\n¿La habéis probado en vuestros proyectos o preferís otras alternativas?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #MachineLearning #BigData",
+      "clave": "herramienta: Ollama",
+      "formato": "herramienta",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
