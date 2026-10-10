@@ -37,6 +37,15 @@
       "intento": 1,
       "especial": false,
       "imagen": null
+    },
+    "42": {
+      "post": "🤖 Este post no lo ha elegido una IA… pero los anteriores, sí.\n\nLos posts de IA que habéis visto estos días en mi perfil los prepara un agente que he programado en Python. Hoy toca contar cómo funciona por dentro:\n\n1️⃣ Cada mañana lee noticias recientes (Hugging Face, The Verge, Hacker News) y un LLM (Google Gemini) redacta un borrador.\n2️⃣ El formato cambia según el día: noticia de la semana los lunes, truco de Python los miércoles, herramienta recomendada los viernes.\n3️⃣ El borrador me llega a Telegram con tres botones: publicar, pedir otro o descartar. Nada sale sin que yo lo revise, y puedo decidir cuando quiera.\n4️⃣ Al pulsar, un webhook en Cloudflare Workers lanza GitHub Actions, que publica aquí con la API oficial de LinkedIn (OAuth 2.0) y me confirma en Telegram con el enlace.\n5️⃣ Todo funciona en la nube, sin servidores propios y con coste cero.\n\nAdemás, es configurable: cambiando un archivo, cualquiera puede usarlo con su propio tema (por ejemplo, economía).\n\nLo que más he aprendido: arquitecturas orientadas a eventos, gestionar errores de APIs saturadas y la importancia de dejar siempre a una persona en el bucle cuando una IA publica en tu nombre.\n\nLo he construido apoyándome en IA como asistente de programación, que es como creo que vamos a trabajar los desarrolladores a partir de ahora.\n\nEl código está en GitHub 👇\nhttps://github.com/EvaristoRuizHaro/IA-AGENT\n\n¿Automatizaríais vuestra presencia en LinkedIn o preferís escribir cada post a mano?\n\n#InteligenciaArtificial #Python #Automatización #GitHubActions #Cloudflare",
+      "clave": null,
+      "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": true,
+      "imagen": null
     }
   }
 }
