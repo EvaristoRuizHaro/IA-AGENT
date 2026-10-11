@@ -46,6 +46,15 @@
       "intento": 1,
       "especial": true,
       "imagen": null
+    },
+    "44": {
+      "post": "¿IA local o servicios en la nube? Un dilema clave hoy.\n\nCada vez es más posible ejecutar modelos potentes localmente para evitar ceder datos personales a servicios en la nube, aunque aprender a usarlos puede ser abrumador.\n\nComo estudiante de IA, creo que dominar la ejecución de modelos en local es fundamental para entender la privacidad y el despliegue real.\n\n¿Prefieres desarrollar con modelos locales o dependes de la nube?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1008484/learning-local-ai-hermes-qwen-model-mac-studio-testing-diary-progress\n\n#InteligenciaArtificial #BigData #MachineLearning",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1008484/learning-local-ai-hermes-qwen-model-mac-studio-testing-diary-progress",
+      "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
