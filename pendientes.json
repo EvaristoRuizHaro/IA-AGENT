@@ -55,6 +55,15 @@
       "intento": 1,
       "especial": false,
       "imagen": null
+    },
+    "46": {
+      "post": "📌 La noticia de la semana: Microsoft busca reducir su dependencia de Nvidia con hardware propio.\n\nHan presentado Maia 300, su chip de tercera generación diseñado como sistema principal de inferencia para sus productos y servicios en la nube. Esta arquitectura busca optimizar costes y eficiencia, además de responder mejor a las exigencias de los modelos de razonamiento y tareas agénticas.\n\nCreo que optimizar la infraestructura de hardware es el paso decisivo para que el despliegue de estos nuevos modelos sea realmente viable a gran escala.\n\n¿Pensáis que los chips a medida de las grandes tecnológicas restarán peso a Nvidia?\n\nhttps://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout\n\n#InteligenciaArtificial #CloudComputing #Hardware",
+      "clave": "https://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout",
+      "formato": "destacada",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
