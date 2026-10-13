@@ -64,6 +64,15 @@
       "intento": 1,
       "especial": false,
       "imagen": null
+    },
+    "48": {
+      "post": "El hardware propio sigue ganando terreno en la infraestructura de IA.\n\nMicrosoft ha presentado Maia 300, su chip de tercera generación diseñado como sistema principal de inferencia en la nube. Busca reducir costes, ganar eficiencia y optimizar el rendimiento con modelos de razonamiento y tareas agénticas.\n\nComo estudiante de IA y Big Data, creo que dominar la eficiencia en infraestructura será tan determinante como entrenar buenos modelos.\n\n¿Creéis que los chips a medida ganarán la partida en los costes de inferencia?\n\nhttps://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout\n\n#InteligenciaArtificial #BigData #CloudComputing",
+      "clave": "https://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout",
+      "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
