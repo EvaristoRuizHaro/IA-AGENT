@@ -73,6 +73,15 @@
       "intento": 1,
       "especial": false,
       "imagen": null
+    },
+    "50": {
+      "post": "💡 Truco de pandas: olvídate de perder la cabeza buscando duplicados exactos en tus datasets.\n\nResuelve el problema de identificar filas repetidas considerando solo las columnas clave que te interesan.\n\ndf.duplicated(subset=['id_cliente'], keep='last')\n\nTe devuelve una serie booleana marcando como True las filas repetidas, quedándote solo con la última registrada.\n\n¿Lo conocíais o solíais usar drop_duplicates() sin filtro?\n\n#Python #Pandas #DataScience",
+      "clave": "truco: Truco de pandas para duplicados",
+      "formato": "truco",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
