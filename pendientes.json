@@ -82,6 +82,15 @@
       "intento": 1,
       "especial": false,
       "imagen": null
+    },
+    "52": {
+      "post": "¿Preparado para hacer una entrevista de trabajo con una IA?\n\nMcKinsey & Company pedirá a algunos candidatos junior que mantengan una conversación de 10 minutos con una simulación de un cliente generada por IA como parte del proceso de selección. Esta simulación busca reflejar el 80% de los escenarios reales que los consultores encuentran en su día a día.\n\nComo estudiante de IA, me parece un caso de uso fascinante para evaluar habilidades técnicas y blandas de forma automatizada.\n\n¿Os convence este tipo de filtros en procesos de selección?\n\nhttps://www.theverge.com/news/1011654/mckinsey-ai-client-interview\n\n#InteligenciaArtificial #BigData #EmpleoTech",
+      "clave": "https://www.theverge.com/news/1011654/mckinsey-ai-client-interview",
+      "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
     }
   }
 }
