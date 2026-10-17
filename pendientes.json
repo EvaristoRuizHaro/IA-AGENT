@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "36": {
-      "post": "💡 Truco de pandas: Convierte cadenas de texto en fechas con to_datetime.\n\nEvita errores al analizar series temporales convirtiendo columnas de texto al formato correcto de una sola vez.\n\ndf['fecha'] = pd.to_datetime(df['fecha'])\n\nTendrás una columna de tipo datetime lista para filtrar, agrupar y extraer años o meses sin complicaciones.\n\n¿Conocíais este método?\n\n#DataScience #Python #Pandas",
-      "clave": "truco: Truco de pandas",
-      "formato": "truco",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "38": {
       "post": "¿Adiós a las interfaces estáticas en la IA?\n\nGoogle is launching a \"universal\" Gemini AI agent that can work across apps and devices in the background, available within the Gemini Enterprise app for users to chat and assign tasks from a single interface.\n\nMe parece un gran avance hacia la productividad real, integrando agentes autónomos en el día a día profesional.\n\n¿Cómo creéis que cambiará esto la forma en que interactuamos con el software corporativo?\n\nhttps://www.theverge.com/tech/1007904/google-gemini-ai-agent-enterprise\n\n#ArtificialIntelligence #BigData #MachineLearning",
       "clave": "https://www.theverge.com/tech/1007904/google-gemini-ai-agent-enterprise",
@@ -86,6 +77,15 @@
       "post": "🛠️ Herramienta de la semana: Ollama\n\nPermite ejecutar modelos de lenguaje abiertos como Llama, Gemma o Mistral directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nIdeal para hacer pruebas de NLP de manera local y privada mientras practicas en proyectos de IA.\n\n¿Qué herramienta usáis vosotros para correr modelos en local?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #MachineLearning #BigData",
       "clave": "herramienta: Ollama",
       "formato": "herramienta",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "56": {
+      "post": "ChatGPT ya puede ver lo que tienes abierto en el navegador.\n\nOpenAI ha actualizado su extensión de Google Chrome para que ChatGPT pueda acceder a tus pestañas abiertas cuando etiquetas al navegador desde la app web o de escritorio.\n\nPara quienes nos formamos en IA y desarrollo, este tipo de integraciones demuestran cómo la asistencia contextual busca eliminar la fricción de copiar y pegar información en nuestro trabajo diario.\n\n¿Le darías acceso a tus pestañas abiertas o prefieres limitar los permisos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs\n\n#InteligenciaArtificial #OpenAI #Productividad",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs",
+      "formato": "noticia",
       "descartados": [],
       "intento": 1,
       "especial": false,
