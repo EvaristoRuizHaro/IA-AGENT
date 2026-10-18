@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "38": {
-      "post": "¿Adiós a las interfaces estáticas en la IA?\n\nGoogle is launching a \"universal\" Gemini AI agent that can work across apps and devices in the background, available within the Gemini Enterprise app for users to chat and assign tasks from a single interface.\n\nMe parece un gran avance hacia la productividad real, integrando agentes autónomos en el día a día profesional.\n\n¿Cómo creéis que cambiará esto la forma en que interactuamos con el software corporativo?\n\nhttps://www.theverge.com/tech/1007904/google-gemini-ai-agent-enterprise\n\n#ArtificialIntelligence #BigData #MachineLearning",
-      "clave": "https://www.theverge.com/tech/1007904/google-gemini-ai-agent-enterprise",
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "40": {
       "post": "🛠️ Herramienta de la semana: Ollama.\n\nEs una aplicación que permite ejecutar modelos de lenguaje abiertos como Llama, Gemma o Mistral directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nMe resulta muy útil para realizar pruebas locales con LLMs mientras desarrollo proyectos de IA sin consumir recursos externos ni comprometer datos.\n\n¿La habéis probado en vuestros proyectos o preferís otras alternativas?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #MachineLearning #BigData",
       "clave": "herramienta: Ollama",
@@ -85,6 +76,15 @@
     "56": {
       "post": "ChatGPT ya puede ver lo que tienes abierto en el navegador.\n\nOpenAI ha actualizado su extensión de Google Chrome para que ChatGPT pueda acceder a tus pestañas abiertas cuando etiquetas al navegador desde la app web o de escritorio.\n\nPara quienes nos formamos en IA y desarrollo, este tipo de integraciones demuestran cómo la asistencia contextual busca eliminar la fricción de copiar y pegar información en nuestro trabajo diario.\n\n¿Le darías acceso a tus pestañas abiertas o prefieres limitar los permisos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs\n\n#InteligenciaArtificial #OpenAI #Productividad",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs",
+      "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "58": {
+      "post": "¿Tienen futuro los agentes de IA si la web empieza a bloquearlos?\n\nEmpresas como OpenAI, Meta o Google prometen agentes capaces de navegar por internet para hacer reservas o compras. Sin embargo, cada vez más sitios web están cerrando el paso a estas herramientas autónomas.\n\nComo estudiante de IA, creo que este choque entre la automatización y la protección de las plataformas marcará la forma en que diseñemos estas soluciones.\n\n¿Hacia dónde crees que evolucionará este conflicto?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web\n\n#InteligenciaArtificial #AIAgents #BigData",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
       "formato": "noticia",
       "descartados": [],
       "intento": 1,
