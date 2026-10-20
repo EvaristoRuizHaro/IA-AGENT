@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "42": {
-      "post": "🤖 Este post no lo ha elegido una IA… pero los anteriores, sí.\n\nLos posts de IA que habéis visto estos días en mi perfil los prepara un agente que he programado en Python. Hoy toca contar cómo funciona por dentro:\n\n1️⃣ Cada mañana lee noticias recientes (Hugging Face, The Verge, Hacker News) y un LLM (Google Gemini) redacta un borrador.\n2️⃣ El formato cambia según el día: noticia de la semana los lunes, truco de Python los miércoles, herramienta recomendada los viernes.\n3️⃣ El borrador me llega a Telegram con tres botones: publicar, pedir otro o descartar. Nada sale sin que yo lo revise, y puedo decidir cuando quiera.\n4️⃣ Al pulsar, un webhook en Cloudflare Workers lanza GitHub Actions, que publica aquí con la API oficial de LinkedIn (OAuth 2.0) y me confirma en Telegram con el enlace.\n5️⃣ Todo funciona en la nube, sin servidores propios y con coste cero.\n\nAdemás, es configurable: cambiando un archivo, cualquiera puede usarlo con su propio tema (por ejemplo, economía).\n\nLo que más he aprendido: arquitecturas orientadas a eventos, gestionar errores de APIs saturadas y la importancia de dejar siempre a una persona en el bucle cuando una IA publica en tu nombre.\n\nLo he construido apoyándome en IA como asistente de programación, que es como creo que vamos a trabajar los desarrolladores a partir de ahora.\n\nEl código está en GitHub 👇\nhttps://github.com/EvaristoRuizHaro/IA-AGENT\n\n¿Automatizaríais vuestra presencia en LinkedIn o preferís escribir cada post a mano?\n\n#InteligenciaArtificial #Python #Automatización #GitHubActions #Cloudflare",
-      "clave": null,
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": true,
-      "imagen": null
-    },
     "44": {
       "post": "¿IA local o servicios en la nube? Un dilema clave hoy.\n\nCada vez es más posible ejecutar modelos potentes localmente para evitar ceder datos personales a servicios en la nube, aunque aprender a usarlos puede ser abrumador.\n\nComo estudiante de IA, creo que dominar la ejecución de modelos en local es fundamental para entender la privacidad y el despliegue real.\n\n¿Prefieres desarrollar con modelos locales o dependes de la nube?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1008484/learning-local-ai-hermes-qwen-model-mac-studio-testing-diary-progress\n\n#InteligenciaArtificial #BigData #MachineLearning",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1008484/learning-local-ai-hermes-qwen-model-mac-studio-testing-diary-progress",
@@ -86,6 +77,15 @@
       "post": "📌 La noticia de la semana: el impacto real de los agentes autónomos en ciberseguridad.\n\nUna firma de seguridad ha descubierto que un hacker logró vulnerar más de 100 sitios web utilizando un ejército de agentes de IA que operaban de forma prácticamente autónoma. El ataque afectó a grandes corporaciones como John Deere y SharkNinja, evidenciando los nuevos riesgos asociados a la automatización avanzada de amenazas.\n\nComo estudiante de IA, este tipo de casos me recuerda que la automatización no solo sirve para crear, sino que exige repensar la seguridad defensiva desde la base.\n\n¿Cómo crees que deben prepararse las empresas frente a ataques ejecutados por agentes autónomos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins\n\n#InteligenciaArtificial #BigData #Ciberseguridad",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins",
       "formato": "destacada",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "62": {
+      "post": "Los agentes de IA autónomos ya no solo automatizan tareas: también ejecutan ciberataques.\n\nSegún la firma Norforge, un atacante vulneró más de 100 webs con un ejército de agentes de IA casi autónomos, afectando a empresas como John Deere o Cummins.\n\nPara quienes nos formamos en IA, esto confirma que la seguridad técnica debe ser una prioridad desde el diseño y no un añadido posterior.\n\n¿Crees que los sistemas actuales están listos para frenar agentes autónomos maliciosos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins\n\n#InteligenciaArtificial #Ciberseguridad #BigData",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins",
+      "formato": "noticia",
       "descartados": [],
       "intento": 1,
       "especial": false,
