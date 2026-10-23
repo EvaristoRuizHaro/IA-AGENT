@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "48": {
-      "post": "El hardware propio sigue ganando terreno en la infraestructura de IA.\n\nMicrosoft ha presentado Maia 300, su chip de tercera generación diseñado como sistema principal de inferencia en la nube. Busca reducir costes, ganar eficiencia y optimizar el rendimiento con modelos de razonamiento y tareas agénticas.\n\nComo estudiante de IA y Big Data, creo que dominar la eficiencia en infraestructura será tan determinante como entrenar buenos modelos.\n\n¿Creéis que los chips a medida ganarán la partida en los costes de inferencia?\n\nhttps://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout\n\n#InteligenciaArtificial #BigData #CloudComputing",
-      "clave": "https://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout",
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "50": {
       "post": "💡 Truco de pandas: olvídate de perder la cabeza buscando duplicados exactos en tus datasets.\n\nResuelve el problema de identificar filas repetidas considerando solo las columnas clave que te interesan.\n\ndf.duplicated(subset=['id_cliente'], keep='last')\n\nTe devuelve una serie booleana marcando como True las filas repetidas, quedándote solo con la última registrada.\n\n¿Lo conocíais o solíais usar drop_duplicates() sin filtro?\n\n#Python #Pandas #DataScience",
       "clave": "truco: Truco de pandas para duplicados",
@@ -86,6 +77,15 @@
       "post": "¿Cómo resolvemos la seguridad cuando los agentes de IA necesitan acceder a nuestras cuentas?\n\n1Password ha presentado una función que permite a los agentes de IA iniciar sesión en servicios sin ver ni manejar las contraseñas. El sistema no da vía libre a los bots y sigue requiriendo la aprobación del usuario para cada acceso.\n\nIntegrar seguridad por diseño es fundamental si queremos que los agentes autónomos sean viables en entornos reales.\n\n¿Dejarías que un agente de IA gestione tus inicios de sesión con este control?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1016399/1password-ai-agent-password-sign-in\n\n#InteligenciaArtificial #Ciberseguridad #AIAgents",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1016399/1password-ai-agent-password-sign-in",
       "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "71": {
+      "post": "🛠️ Herramienta de la semana: Ollama.\n\nEs una aplicación que permite ejecutar modelos de lenguaje abiertos (como Llama, Gemma o Mistral) directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nPara mí, que estoy estudiando IA, es perfecta para hacer pruebas y prototipos con LLMs de forma local y sin coste de servidores.\n\n¿La habéis probado en vuestros proyectos?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #BigData #MachineLearning",
+      "clave": "herramienta: Ollama",
+      "formato": "herramienta",
       "descartados": [],
       "intento": 1,
       "especial": false,
