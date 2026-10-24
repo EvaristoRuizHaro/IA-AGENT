@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "50": {
-      "post": "💡 Truco de pandas: olvídate de perder la cabeza buscando duplicados exactos en tus datasets.\n\nResuelve el problema de identificar filas repetidas considerando solo las columnas clave que te interesan.\n\ndf.duplicated(subset=['id_cliente'], keep='last')\n\nTe devuelve una serie booleana marcando como True las filas repetidas, quedándote solo con la última registrada.\n\n¿Lo conocíais o solíais usar drop_duplicates() sin filtro?\n\n#Python #Pandas #DataScience",
-      "clave": "truco: Truco de pandas para duplicados",
-      "formato": "truco",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "52": {
       "post": "¿Preparado para hacer una entrevista de trabajo con una IA?\n\nMcKinsey & Company pedirá a algunos candidatos junior que mantengan una conversación de 10 minutos con una simulación de un cliente generada por IA como parte del proceso de selección. Esta simulación busca reflejar el 80% de los escenarios reales que los consultores encuentran en su día a día.\n\nComo estudiante de IA, me parece un caso de uso fascinante para evaluar habilidades técnicas y blandas de forma automatizada.\n\n¿Os convence este tipo de filtros en procesos de selección?\n\nhttps://www.theverge.com/news/1011654/mckinsey-ai-client-interview\n\n#InteligenciaArtificial #BigData #EmpleoTech",
       "clave": "https://www.theverge.com/news/1011654/mckinsey-ai-client-interview",
@@ -86,6 +77,15 @@
       "post": "🛠️ Herramienta de la semana: Ollama.\n\nEs una aplicación que permite ejecutar modelos de lenguaje abiertos (como Llama, Gemma o Mistral) directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nPara mí, que estoy estudiando IA, es perfecta para hacer pruebas y prototipos con LLMs de forma local y sin coste de servidores.\n\n¿La habéis probado en vuestros proyectos?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #BigData #MachineLearning",
       "clave": "herramienta: Ollama",
       "formato": "herramienta",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "73": {
+      "post": "¿Entrenar modelos punteros de IA completamente desconectados de internet?\n\nOpenAI ha comenzado a entrenar sus modelos más avanzados en un entorno offline tras varios incidentes de ciberseguridad. En este sistema aislado, los modelos solo interactúan con contenido web indexado y en caché para no poner en riesgo sistemas externos.\n\nComo estudiante de IA, creo que esto demuestra que la seguridad y el control de la infraestructura son ya tan críticos como la propia capacidad algorítmica.\n\n¿Creéis que este aislamiento será el nuevo estándar para entrenar modelos frontera?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet\n\n#InteligenciaArtificial #MachineLearning #Ciberseguridad",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet",
+      "formato": "noticia",
       "descartados": [],
       "intento": 1,
       "especial": false,
