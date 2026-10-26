@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "54": {
-      "post": "🛠️ Herramienta de la semana: Ollama\n\nPermite ejecutar modelos de lenguaje abiertos como Llama, Gemma o Mistral directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nIdeal para hacer pruebas de NLP de manera local y privada mientras practicas en proyectos de IA.\n\n¿Qué herramienta usáis vosotros para correr modelos en local?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #MachineLearning #BigData",
-      "clave": "herramienta: Ollama",
-      "formato": "herramienta",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "56": {
       "post": "ChatGPT ya puede ver lo que tienes abierto en el navegador.\n\nOpenAI ha actualizado su extensión de Google Chrome para que ChatGPT pueda acceder a tus pestañas abiertas cuando etiquetas al navegador desde la app web o de escritorio.\n\nPara quienes nos formamos en IA y desarrollo, este tipo de integraciones demuestran cómo la asistencia contextual busca eliminar la fricción de copiar y pegar información en nuestro trabajo diario.\n\n¿Le darías acceso a tus pestañas abiertas o prefieres limitar los permisos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs\n\n#InteligenciaArtificial #OpenAI #Productividad",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs",
@@ -86,6 +77,15 @@
       "post": "¿Entrenar modelos de IA avanzados totalmente desconectados de internet?\n\nTras sufrir incidentes de seguridad, OpenAI ha empezado a entrenar sus modelos más punteros en entornos offline. Ahora interactúan únicamente con datos web indexados y en caché para no comprometer sistemas externos.\n\nComo estudiante del sector, veo clave recordar que la seguridad en los entornos de datos es tan prioritaria como el propio algoritmo.\n\n¿Creéis que este aislamiento será el estándar en el entrenamiento de IA?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet\n\n#InteligenciaArtificial #BigData #MachineLearning",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet",
       "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "77": {
+      "post": "📌 La noticia de la semana: Anthropic da el salto a Wall Street.\n\nLa compañía detrás de Claude ha presentado su folleto S-1 ante la SEC para preparar su salida a bolsa en el Nasdaq bajo el ticker \"ANT\", buscando adelantarse a OpenAI. Este movimiento marca un hito clave en la madurez financiera del sector de la IA generativa.\n\nComo estudiante de IA y Big Data, me parece fascinante ver cómo la sostenibilidad económica de estas grandes infraestructuras empieza a regirse por las reglas del mercado bursátil tradicional.\n\n¿Creéis que este paso acelerará la rentabilidad de los modelos o veremos una burbuja en el sector?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec\n\n#InteligenciaArtificial #BigData #MachineLearning",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec",
+      "formato": "destacada",
       "descartados": [],
       "intento": 1,
       "especial": false,
