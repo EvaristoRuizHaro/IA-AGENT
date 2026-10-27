@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "56": {
-      "post": "ChatGPT ya puede ver lo que tienes abierto en el navegador.\n\nOpenAI ha actualizado su extensión de Google Chrome para que ChatGPT pueda acceder a tus pestañas abiertas cuando etiquetas al navegador desde la app web o de escritorio.\n\nPara quienes nos formamos en IA y desarrollo, este tipo de integraciones demuestran cómo la asistencia contextual busca eliminar la fricción de copiar y pegar información en nuestro trabajo diario.\n\n¿Le darías acceso a tus pestañas abiertas o prefieres limitar los permisos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs\n\n#InteligenciaArtificial #OpenAI #Productividad",
-      "clave": "https://www.theverge.com/ai-artificial-intelligence/1012510/openai-chatgpt-google-chrome-tabs",
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "58": {
       "post": "¿Tienen futuro los agentes de IA si la web empieza a bloquearlos?\n\nEmpresas como OpenAI, Meta o Google prometen agentes capaces de navegar por internet para hacer reservas o compras. Sin embargo, cada vez más sitios web están cerrando el paso a estas herramientas autónomas.\n\nComo estudiante de IA, creo que este choque entre la automatización y la protección de las plataformas marcará la forma en que diseñemos estas soluciones.\n\n¿Hacia dónde crees que evolucionará este conflicto?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web\n\n#InteligenciaArtificial #AIAgents #BigData",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
@@ -86,6 +77,15 @@
       "post": "📌 La noticia de la semana: Anthropic da el salto a Wall Street.\n\nLa compañía detrás de Claude ha presentado su folleto S-1 ante la SEC para preparar su salida a bolsa en el Nasdaq bajo el ticker \"ANT\", buscando adelantarse a OpenAI. Este movimiento marca un hito clave en la madurez financiera del sector de la IA generativa.\n\nComo estudiante de IA y Big Data, me parece fascinante ver cómo la sostenibilidad económica de estas grandes infraestructuras empieza a regirse por las reglas del mercado bursátil tradicional.\n\n¿Creéis que este paso acelerará la rentabilidad de los modelos o veremos una burbuja en el sector?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec\n\n#InteligenciaArtificial #BigData #MachineLearning",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec",
       "formato": "destacada",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "79": {
+      "post": "¿El boom de la IA nos iba a dejar descansar?\n\nMientras se prepara para salir a bolsa, la documentación presentada por Anthropic revela que sus centros de datos dependen cada vez más del gas natural ante la intensa competencia por el suministro eléctrico. \n\nComo estudiante de IA, veo claro que el verdadero cuello de botella del sector ya no es solo el talento o los datos, sino la energía física necesaria para sostener esta infraestructura.\n\n¿Crees que la sostenibilidad energética frenará el desarrollo de los próximos grandes modelos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018994/anthropic-ipo-ai-data-center-energy-climate-risk\n\n#InteligenciaArtificial #BigData #Sostenibilidad",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1018994/anthropic-ipo-ai-data-center-energy-climate-risk",
+      "formato": "noticia",
       "descartados": [],
       "intento": 1,
       "especial": false,
