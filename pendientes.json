@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "58": {
-      "post": "¿Tienen futuro los agentes de IA si la web empieza a bloquearlos?\n\nEmpresas como OpenAI, Meta o Google prometen agentes capaces de navegar por internet para hacer reservas o compras. Sin embargo, cada vez más sitios web están cerrando el paso a estas herramientas autónomas.\n\nComo estudiante de IA, creo que este choque entre la automatización y la protección de las plataformas marcará la forma en que diseñemos estas soluciones.\n\n¿Hacia dónde crees que evolucionará este conflicto?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web\n\n#InteligenciaArtificial #AIAgents #BigData",
-      "clave": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web",
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "60": {
       "post": "📌 La noticia de la semana: el impacto real de los agentes autónomos en ciberseguridad.\n\nUna firma de seguridad ha descubierto que un hacker logró vulnerar más de 100 sitios web utilizando un ejército de agentes de IA que operaban de forma prácticamente autónoma. El ataque afectó a grandes corporaciones como John Deere y SharkNinja, evidenciando los nuevos riesgos asociados a la automatización avanzada de amenazas.\n\nComo estudiante de IA, este tipo de casos me recuerda que la automatización no solo sirve para crear, sino que exige repensar la seguridad defensiva desde la base.\n\n¿Cómo crees que deben prepararse las empresas frente a ataques ejecutados por agentes autónomos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins\n\n#InteligenciaArtificial #BigData #Ciberseguridad",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins",
@@ -86,6 +77,15 @@
       "post": "¿El boom de la IA nos iba a dejar descansar?\n\nMientras se prepara para salir a bolsa, la documentación presentada por Anthropic revela que sus centros de datos dependen cada vez más del gas natural ante la intensa competencia por el suministro eléctrico. \n\nComo estudiante de IA, veo claro que el verdadero cuello de botella del sector ya no es solo el talento o los datos, sino la energía física necesaria para sostener esta infraestructura.\n\n¿Crees que la sostenibilidad energética frenará el desarrollo de los próximos grandes modelos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018994/anthropic-ipo-ai-data-center-energy-climate-risk\n\n#InteligenciaArtificial #BigData #Sostenibilidad",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1018994/anthropic-ipo-ai-data-center-energy-climate-risk",
       "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "81": {
+      "post": "💡 Truco de pandas: olvídate de buscar duplicados uno a uno y usa drop_duplicates.\n\nResuelve el problema de limpiar filas repetidas en tu dataset con una sola línea de código.\n\ndf_limpio = df.drop_duplicates(subset=['id_cliente'])\n\nElimina los registros repetidos basándose en columnas específicas y deja tu tabla lista para entrenar modelos.\n\n¿Lo conocíais o solíais hacerlo con bucles?\n\n#Python #DataScience #BigData",
+      "clave": "truco: Truco de pandas para duplicados",
+      "formato": "truco",
       "descartados": [],
       "intento": 1,
       "especial": false,
