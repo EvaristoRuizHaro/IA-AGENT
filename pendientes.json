@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "60": {
-      "post": "📌 La noticia de la semana: el impacto real de los agentes autónomos en ciberseguridad.\n\nUna firma de seguridad ha descubierto que un hacker logró vulnerar más de 100 sitios web utilizando un ejército de agentes de IA que operaban de forma prácticamente autónoma. El ataque afectó a grandes corporaciones como John Deere y SharkNinja, evidenciando los nuevos riesgos asociados a la automatización avanzada de amenazas.\n\nComo estudiante de IA, este tipo de casos me recuerda que la automatización no solo sirve para crear, sino que exige repensar la seguridad defensiva desde la base.\n\n¿Cómo crees que deben prepararse las empresas frente a ataques ejecutados por agentes autónomos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins\n\n#InteligenciaArtificial #BigData #Ciberseguridad",
-      "clave": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins",
-      "formato": "destacada",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "62": {
       "post": "Los agentes de IA autónomos ya no solo automatizan tareas: también ejecutan ciberataques.\n\nSegún la firma Norforge, un atacante vulneró más de 100 webs con un ejército de agentes de IA casi autónomos, afectando a empresas como John Deere o Cummins.\n\nPara quienes nos formamos en IA, esto confirma que la seguridad técnica debe ser una prioridad desde el diseño y no un añadido posterior.\n\n¿Crees que los sistemas actuales están listos para frenar agentes autónomos maliciosos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins\n\n#InteligenciaArtificial #Ciberseguridad #BigData",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins",
@@ -86,6 +77,15 @@
       "post": "💡 Truco de pandas: olvídate de buscar duplicados uno a uno y usa drop_duplicates.\n\nResuelve el problema de limpiar filas repetidas en tu dataset con una sola línea de código.\n\ndf_limpio = df.drop_duplicates(subset=['id_cliente'])\n\nElimina los registros repetidos basándose en columnas específicas y deja tu tabla lista para entrenar modelos.\n\n¿Lo conocíais o solíais hacerlo con bucles?\n\n#Python #DataScience #BigData",
       "clave": "truco: Truco de pandas para duplicados",
       "formato": "truco",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "83": {
+      "post": "¿Un nuevo modelo open-weight que promete marcar la diferencia?\n\nMistral AI ha anunciado que Mistral Large 4 (Le Chonk) ya está disponible en formato Open Weight, abriendo nuevas posibilidades para la comunidad.\n\nComo estudiante de IA, me parece clave que proyectos tan potentes sigan apostando por el código abierto para experimentar.\n\n¿Qué os parece este lanzamiento para vuestros proyectos?\n\nhttps://mistral.ai/news/mistral-large-4-oss/\n\n#InteligenciaArtificial #MachineLearning #BigData",
+      "clave": "https://mistral.ai/news/mistral-large-4-oss/",
+      "formato": "noticia",
       "descartados": [],
       "intento": 1,
       "especial": false,
