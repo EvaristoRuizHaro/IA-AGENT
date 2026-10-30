@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "62": {
-      "post": "Los agentes de IA autónomos ya no solo automatizan tareas: también ejecutan ciberataques.\n\nSegún la firma Norforge, un atacante vulneró más de 100 webs con un ejército de agentes de IA casi autónomos, afectando a empresas como John Deere o Cummins.\n\nPara quienes nos formamos en IA, esto confirma que la seguridad técnica debe ser una prioridad desde el diseño y no un añadido posterior.\n\n¿Crees que los sistemas actuales están listos para frenar agentes autónomos maliciosos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins\n\n#InteligenciaArtificial #Ciberseguridad #BigData",
-      "clave": "https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins",
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "65": {
       "post": "💡 Truco de Pandas: Carga solo las primeras filas de un archivo gigantesco antes de procesarlo entero.\n\nIdeal para explorar datasets enormes en tu ordenador sin quedarte sin memoria RAM.\n\ndf = pd.read_csv('datos_gigantes.csv', nrows=100)\nprint(df.head())\n\nAsí obtienes una vista previa rápida de las columnas y los tipos de datos en segundos.\n\n¿Conocíais este parámetro?\n\n#DataScience #Python #BigData",
       "clave": "truco: truco pandas read_csv nrows",
@@ -86,6 +77,15 @@
       "post": "¿Un nuevo modelo open-weight que promete marcar la diferencia?\n\nMistral AI ha anunciado que Mistral Large 4 (Le Chonk) ya está disponible en formato Open Weight, abriendo nuevas posibilidades para la comunidad.\n\nComo estudiante de IA, me parece clave que proyectos tan potentes sigan apostando por el código abierto para experimentar.\n\n¿Qué os parece este lanzamiento para vuestros proyectos?\n\nhttps://mistral.ai/news/mistral-large-4-oss/\n\n#InteligenciaArtificial #MachineLearning #BigData",
       "clave": "https://mistral.ai/news/mistral-large-4-oss/",
       "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "85": {
+      "post": "🛠️ Herramienta de la semana: Ollama\n\nPermite ejecutar modelos de lenguaje abiertos como Llama, Gemma o Mistral directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nPara quienes estudiamos IA y datos, es una opción perfecta para experimentar con LLMs en local y prototipar sin costes de conexión ni APIs.\n\n¿La has probado ya o sueles trabajar con modelos en la nube?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #LLM #BigData",
+      "clave": "herramienta: Ollama",
+      "formato": "herramienta",
       "descartados": [],
       "intento": 1,
       "especial": false,
