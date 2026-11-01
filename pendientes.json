@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "69": {
-      "post": "¿Cómo resolvemos la seguridad cuando los agentes de IA necesitan acceder a nuestras cuentas?\n\n1Password ha presentado una función que permite a los agentes de IA iniciar sesión en servicios sin ver ni manejar las contraseñas. El sistema no da vía libre a los bots y sigue requiriendo la aprobación del usuario para cada acceso.\n\nIntegrar seguridad por diseño es fundamental si queremos que los agentes autónomos sean viables en entornos reales.\n\n¿Dejarías que un agente de IA gestione tus inicios de sesión con este control?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1016399/1password-ai-agent-password-sign-in\n\n#InteligenciaArtificial #Ciberseguridad #AIAgents",
-      "clave": "https://www.theverge.com/ai-artificial-intelligence/1016399/1password-ai-agent-password-sign-in",
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "71": {
       "post": "🛠️ Herramienta de la semana: Ollama.\n\nEs una aplicación que permite ejecutar modelos de lenguaje abiertos (como Llama, Gemma o Mistral) directamente en tu propio ordenador desde la terminal, sin depender de la nube.\n\nPara mí, que estoy estudiando IA, es perfecta para hacer pruebas y prototipos con LLMs de forma local y sin coste de servidores.\n\n¿La habéis probado en vuestros proyectos?\n\nhttps://ollama.com\n\n#InteligenciaArtificial #BigData #MachineLearning",
       "clave": "herramienta: Ollama",
@@ -84,6 +75,15 @@
     },
     "87": {
       "post": "¿Un estándar único para regular el scraping en IA?\n\nOpenAI, Google, Microsoft y Anthropic adoptarán un nuevo estándar común para que los editores puedan excluir su contenido del entrenamiento de modelos de forma unificada, en lugar de gestionarlo empresa por empresa.\n\nPara quienes nos formamos en IA y Big Data, es una gran noticia ver avances hacia la estandarización y el respeto al origen de los datos.\n\n¿Crees que este tipo de acuerdos facilitará un desarrollo más ético de los modelos?\n\nhttps://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out\n\n#InteligenciaArtificial #BigData #DataScience",
+      "clave": "https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out",
+      "formato": "noticia",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "89": {
+      "post": "¿El fin del scraping descontrolado para entrenar IA?\n\nOpenAI, Google, Microsoft y Anthropic respaldarán un estándar común (\"policy token\") para que los editores puedan excluir sus contenidos del entrenamiento de modelos de forma unificada.\n\nComo futuro profesional de los datos, creo que regular y estandarizar la ingesta de fuentes es un paso necesario para lograr datasets más éticos y sostenibles.\n\n¿Crees que este tipo de acuerdos solucionará los debates sobre derechos de autor en IA?\n\nhttps://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out\n\n#InteligenciaArtificial #BigData #MachineLearning",
       "clave": "https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out",
       "formato": "noticia",
       "descartados": [],
