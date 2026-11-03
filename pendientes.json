@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "73": {
-      "post": "¿Entrenar modelos punteros de IA completamente desconectados de internet?\n\nOpenAI ha comenzado a entrenar sus modelos más avanzados en un entorno offline tras varios incidentes de ciberseguridad. En este sistema aislado, los modelos solo interactúan con contenido web indexado y en caché para no poner en riesgo sistemas externos.\n\nComo estudiante de IA, creo que esto demuestra que la seguridad y el control de la infraestructura son ya tan críticos como la propia capacidad algorítmica.\n\n¿Creéis que este aislamiento será el nuevo estándar para entrenar modelos frontera?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet\n\n#InteligenciaArtificial #MachineLearning #Ciberseguridad",
-      "clave": "https://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet",
-      "formato": "noticia",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "75": {
       "post": "¿Entrenar modelos de IA avanzados totalmente desconectados de internet?\n\nTras sufrir incidentes de seguridad, OpenAI ha empezado a entrenar sus modelos más punteros en entornos offline. Ahora interactúan únicamente con datos web indexados y en caché para no comprometer sistemas externos.\n\nComo estudiante del sector, veo clave recordar que la seguridad en los entornos de datos es tan prioritaria como el propio algoritmo.\n\n¿Creéis que este aislamiento será el estándar en el entrenamiento de IA?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet\n\n#InteligenciaArtificial #BigData #MachineLearning",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet",
@@ -86,6 +77,15 @@
       "post": "📌 La noticia de la semana: los gigantes de la IA se unen por fin en un estándar común de scraping.\n\nOpenAI, Google, Microsoft y Anthropic han acordado adoptar un sistema compartido mediante un \"token de política\" para que los editores puedan excluirse del rastreo de datos de forma global. Esta medida simplifica la gestión de los creadores de contenido frente al entrenamiento de modelos y busca frenar la fragmentación regulatoria actual.\n\nDesde mi perspectiva en el Big Data, la gobernanza del dato y el respeto a las fuentes van a ser claves para la sostenibilidad técnica y legal de los próximos LLMs.\n\n¿Creéis que este estándar será suficiente para calmar las tensiones entre creadores y desarrolladores de IA?\n\nhttps://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out\n\n#BigData #InteligenciaArtificial #DataGovernance",
       "clave": "https://www.theverge.com/tech/1023763/openai-google-microsoft-ai-scraping-standard-opt-out",
       "formato": "destacada",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "93": {
+      "post": "¿Cómo rentabilizar la IA sin disparar el presupuesto en infraestructuras?\n\nApple sigue apostando fuerte por la inteligencia artificial integrando tanto sus propias soluciones como las de terceros, logrando su mejor año fiscal en ingresos sin incurrir en el gasto masivo que sufren sus competidores.\n\nComo estudiante de IA, me parece un caso de estudio fascinante sobre eficiencia y estrategia de negocio en el sector tecnológico.\n\n¿Crees que este enfoque sostenible marcará la pauta para otras grandes empresas este año?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1025245/apple-earnings-q4-ai\n\n#InteligenciaArtificial #BigData #MachineLearning",
+      "clave": "https://www.theverge.com/ai-artificial-intelligence/1025245/apple-earnings-q4-ai",
+      "formato": "noticia",
       "descartados": [],
       "intento": 1,
       "especial": false,
