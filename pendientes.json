@@ -1,15 +1,6 @@
 {
   "offset": 519082892,
   "borradores": {
-    "77": {
-      "post": "📌 La noticia de la semana: Anthropic da el salto a Wall Street.\n\nLa compañía detrás de Claude ha presentado su folleto S-1 ante la SEC para preparar su salida a bolsa en el Nasdaq bajo el ticker \"ANT\", buscando adelantarse a OpenAI. Este movimiento marca un hito clave en la madurez financiera del sector de la IA generativa.\n\nComo estudiante de IA y Big Data, me parece fascinante ver cómo la sostenibilidad económica de estas grandes infraestructuras empieza a regirse por las reglas del mercado bursátil tradicional.\n\n¿Creéis que este paso acelerará la rentabilidad de los modelos o veremos una burbuja en el sector?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec\n\n#InteligenciaArtificial #BigData #MachineLearning",
-      "clave": "https://www.theverge.com/ai-artificial-intelligence/1018476/anthropic-ipo-details-s1-filed-sec",
-      "formato": "destacada",
-      "descartados": [],
-      "intento": 1,
-      "especial": false,
-      "imagen": null
-    },
     "79": {
       "post": "¿El boom de la IA nos iba a dejar descansar?\n\nMientras se prepara para salir a bolsa, la documentación presentada por Anthropic revela que sus centros de datos dependen cada vez más del gas natural ante la intensa competencia por el suministro eléctrico. \n\nComo estudiante de IA, veo claro que el verdadero cuello de botella del sector ya no es solo el talento o los datos, sino la energía física necesaria para sostener esta infraestructura.\n\n¿Crees que la sostenibilidad energética frenará el desarrollo de los próximos grandes modelos?\n\nhttps://www.theverge.com/ai-artificial-intelligence/1018994/anthropic-ipo-ai-data-center-energy-climate-risk\n\n#InteligenciaArtificial #BigData #Sostenibilidad",
       "clave": "https://www.theverge.com/ai-artificial-intelligence/1018994/anthropic-ipo-ai-data-center-energy-climate-risk",
@@ -86,6 +77,15 @@
       "post": "💡 Truco de Pandas: Reemplaza múltiples valores de golpe con map() y un diccionario.\nTe ahorras escribir condicionales anidados (como if/else) cuando limpias columnas categóricas en tus datasets.\n\ndf['nivel'] = df['nivel_estudio'].map({'Grado': 1, 'Master': 2, 'Doctorado': 3})\n\nTransforma texto en números de forma limpia y eficiente en una sola línea de código.\n¿Qué truco usáis vosotros para limpiar datos rápido?\n\n#Python #Pandas #DataScience",
       "clave": "truco: Truco de pandas para duplicar columnas",
       "formato": "truco",
+      "descartados": [],
+      "intento": 1,
+      "especial": false,
+      "imagen": null
+    },
+    "97": {
+      "post": "La IA eficiente en el dispositivo ya está aquí.\n\nHugging Face ha lanzado Phonon TTS, un sistema para generar voz de alta calidad directamente en el dispositivo que encabeza los benchmarks.\n\nComo estudiante de IA, me parece fascinante ver cómo modelos tan potentes se optimizan para ejecutarse localmente sin depender de la nube.\n\n¿Qué casos de uso se os ocurren para voz local en dispositivos?\n\nhttps://huggingface.co/blog/phonon-tts\n\n#InteligenciaArtificial #MachineLearning #BigData",
+      "clave": "https://huggingface.co/blog/phonon-tts",
+      "formato": "noticia",
       "descartados": [],
       "intento": 1,
       "especial": false,
